@@ -43,7 +43,7 @@
         </div>
 
         <!-- Product Grid: 3 columns Desktop, 2 columns Tablet, 1 column Mobile -->
-        @if (FilteredProducts.Count == 0)
+        @if (!FilteredProducts.Any())
         {
             <div class="empty-catalog-state">
                 <h3>No dried delicacies found</h3>

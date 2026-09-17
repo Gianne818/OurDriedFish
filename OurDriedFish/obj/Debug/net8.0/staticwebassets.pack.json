@@ -1,0 +1,129 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OurDriedFish.bundle.scp.css",
+      "PackagePath": "staticwebassets\\OurDriedFish.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\banner-burlap-fish.png",
+      "PackagePath": "staticwebassets\\images\\banner-burlap-fish.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\footer-charcuterie-board.png",
+      "PackagePath": "staticwebassets\\images\\footer-charcuterie-board.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\hero-grilled-fish-mobile.png",
+      "PackagePath": "staticwebassets\\images\\hero-grilled-fish-mobile.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\hero-grilled-fish-tablet.png",
+      "PackagePath": "staticwebassets\\images\\hero-grilled-fish-tablet.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\hero-grilled-fish.png",
+      "PackagePath": "staticwebassets\\images\\hero-grilled-fish.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\owner-lily-smith.png",
+      "PackagePath": "staticwebassets\\images\\owner-lily-smith.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\preview-bowl-fish.png",
+      "PackagePath": "staticwebassets\\images\\preview-bowl-fish.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\preview-bundle-fish.png",
+      "PackagePath": "staticwebassets\\images\\preview-bundle-fish.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\preview-mat-fish.png",
+      "PackagePath": "staticwebassets\\images\\preview-mat-fish.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\bisugo.png",
+      "PackagePath": "staticwebassets\\images\\products\\bisugo.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\dalagang-bukid.png",
+      "PackagePath": "staticwebassets\\images\\products\\dalagang-bukid.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\danggit.png",
+      "PackagePath": "staticwebassets\\images\\products\\danggit.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\dried-anchovies.png",
+      "PackagePath": "staticwebassets\\images\\products\\dried-anchovies.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\dried-flounder.png",
+      "PackagePath": "staticwebassets\\images\\products\\dried-flounder.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\dried-herring.png",
+      "PackagePath": "staticwebassets\\images\\products\\dried-herring.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\dried-katambak.png",
+      "PackagePath": "staticwebassets\\images\\products\\dried-katambak.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\dried-squid.png",
+      "PackagePath": "staticwebassets\\images\\products\\dried-squid.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\products\\fish-tocino.png",
+      "PackagePath": "staticwebassets\\images\\products\\fish-tocino.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\service-custom-selection.png",
+      "PackagePath": "staticwebassets\\images\\service-custom-selection.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\service-drying-fish.png",
+      "PackagePath": "staticwebassets\\images\\service-drying-fish.png"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\images\\service-native-delicacies.png",
+      "PackagePath": "staticwebassets\\images\\service-native-delicacies.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.OurDriedFish.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.OurDriedFish.props",
+      "PackagePath": "build\\OurDriedFish.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.OurDriedFish.props",
+      "PackagePath": "buildMultiTargeting\\OurDriedFish.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.OurDriedFish.props",
+      "PackagePath": "buildTransitive\\OurDriedFish.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

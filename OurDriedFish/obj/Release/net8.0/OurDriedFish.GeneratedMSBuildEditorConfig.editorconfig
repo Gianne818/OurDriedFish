@@ -1,0 +1,75 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = OurDriedFish
+build_property.RootNamespace = OurDriedFish
+build_property.ProjectDir = C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-qabvgqdrw0
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Pages/About.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBYm91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gpcffff1dc
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Pages/Contact.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250YWN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-h0zzisjadl
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Pages/Gallery.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHYWxsZXJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ncawp93r7s
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-cs8z6vgxdv
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/CartDrawer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcQ2FydERyYXdlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-j9m5bzlphl
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/OrderCtaBanner.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcT3JkZXJDdGFCYW5uZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-dc6vj08iu6
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/ProductCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcUHJvZHVjdENhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-vg0t7bis7c
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/ServicesSection.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcU2VydmljZXNTZWN0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-v993ssr1w0
+
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/SiteFooter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcU2l0ZUZvb3Rlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ery47t5vn9
