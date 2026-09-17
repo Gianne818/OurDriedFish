@@ -1,0 +1,147 @@
+@inject CartService CartService
+
+<div class="product-card">
+    <div class="product-header">
+        <h3 class="product-title">@Product.Name</h3>
+        <span class="product-price-tag">PHP @Product.PricePerKg.ToString("N0")/KG</span>
+    </div>
+
+    <div class="product-image-wrap" @onclick="ToggleDetails">
+        <img src="@Product.ImageUrl" alt="@Product.Name" class="product-image" loading="lazy" />
+        @if (Product.IsSeasonal)
+        {
+            <span class="product-badge">Seasonal</span>
+        }
+        <div class="product-overlay">
+            <span class="overlay-text">View Culinary Notes</span>
+        </div>
+    </div>
+
+    <div class="product-info">
+        <div class="product-subtitles">
+            <p class="product-local-name">@Product.LocalName</p>
+            <p class="product-scientific-name">@Product.ScientificName</p>
+        </div>
+
+        <!-- Weight variant selector -->
+        <div class="weight-selector-row">
+            <span class="weight-label">Pack Weight:</span>
+            <div class="weight-pills">
+                @foreach (var weight in Product.AvailableWeightsGrams)
+                {
+                    var isSelected = SelectedWeight == weight;
+                    <button type="button" 
+                            class="weight-pill @(isSelected ? "active" : "")" 
+                            @onclick="() => SelectWeight(weight)">
+                        @(weight >= 1000 ? $"{weight / 1000}kg" : $"{weight}g")
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="product-action-row">
+            <div class="calc-price">
+                <span class="price-label">Price:</span>
+                <span class="current-price">PHP @CalculatedPrice.ToString("N0")</span>
+            </div>
+
+            <div class="quantity-control">
+                <button type="button" class="qty-btn" @onclick="DecrementQty" disabled="@(Quantity <= 1)">-</button>
+                <span class="qty-display">@Quantity</span>
+                <button type="button" class="qty-btn" @onclick="IncrementQty">+</button>
+            </div>
+        </div>
+
+        <button type="button" class="add-to-cart-btn" @onclick="HandleAddToCart">
+            <svg class="cart-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Add to Cart
+        </button>
+    </div>
+
+    @if (ShowDetailsModal)
+    {
+        <div class="details-modal-backdrop" @onclick="ToggleDetails">
+            <div class="details-modal" @onclick:stopPropagation>
+                <button type="button" class="close-modal-btn" @onclick="ToggleDetails">&times;</button>
+                <div class="modal-header">
+                    <h2>@Product.Name</h2>
+                    <span class="modal-price">PHP @Product.PricePerKg.ToString("N0") / KG</span>
+                </div>
+                <p class="modal-local">@Product.LocalName <em>(@Product.ScientificName)</em></p>
+                <div class="modal-body">
+                    <img src="@Product.ImageUrl" alt="@Product.Name" class="modal-image" />
+                    <div class="modal-text">
+                        <h4>Heritage & Sourcing</h4>
+                        <p><strong>Harvest Origin:</strong> @Product.Origin</p>
+                        <p><strong>Taste Profile:</strong> @Product.TasteProfile</p>
+                        <h4 class="mt-3">Description</h4>
+                        <p>@Product.Description</p>
+                        <h4 class="mt-3">Preparation & Cooking</h4>
+                        <p>@Product.PreparationTips</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-pill" @onclick="HandleAddToCartFromModal">
+                        Add to Cart (PHP @CalculatedPrice.ToString("N0"))
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public DriedFishItem Product { get; set; } = null!;
+
+    private int SelectedWeight { get; set; } = 1000;
+    private int Quantity { get; set; } = 1;
+    private bool ShowDetailsModal { get; set; } = false;
+
+    private decimal CalculatedPrice => Product.GetPriceForWeight(SelectedWeight) * Quantity;
+
+    protected override void OnInitialized()
+    {
+        if (Product.AvailableWeightsGrams.Any())
+        {
+            SelectedWeight = Product.AvailableWeightsGrams.Last(); // Default to 1kg or primary
+        }
+    }
+
+    private void SelectWeight(int grams)
+    {
+        SelectedWeight = grams;
+    }
+
+    private void IncrementQty()
+    {
+        Quantity++;
+    }
+
+    private void DecrementQty()
+    {
+        if (Quantity > 1) Quantity--;
+    }
+
+    private void ToggleDetails()
+    {
+        ShowDetailsModal = !ShowDetailsModal;
+    }
+
+    private void HandleAddToCart()
+    {
+        CartService.AddItem(Product, SelectedWeight, Quantity);
+        Quantity = 1;
+    }
+
+    private void HandleAddToCartFromModal()
+    {
+        CartService.AddItem(Product, SelectedWeight, Quantity);
+        ShowDetailsModal = false;
+        Quantity = 1;
+    }
+}

@@ -1,0 +1,77 @@
+@page "/"
+@inject IDriedFishRepository FishRepository
+@inject NavigationManager NavigationManager
+
+<PageTitle>Our Dried Fish® | Authentic Philippine Dried Delicacies</PageTitle>
+
+<div class="home-page">
+    <div class="site-container">
+        <!-- Sub-brand Center Heading matching Desktop-1.png -->
+        <div class="hero-brand-header">
+            <h1 class="hero-brand-title">Our Dried Fish®</h1>
+        </div>
+
+        <!-- Master Hero Image Banner -->
+        <div class="hero-banner-wrap">
+            <picture>
+                <source media="(max-width: 600px)" srcset="images/hero-grilled-fish-mobile.png" />
+                <source media="(max-width: 900px)" srcset="images/hero-grilled-fish-tablet.png" />
+                <img src="images/hero-grilled-fish.png" alt="Grilled dried fish dish with chopsticks" class="hero-banner-img" />
+            </picture>
+        </div>
+
+        <!-- Who We Are Intro Section -->
+        <section class="who-we-are-section">
+            <span class="section-label">WHO WE ARE</span>
+            <h2 class="who-we-are-heading">
+                We're Our Dried Fish® and we're here to help you find your dried delicious flavor.
+            </h2>
+            <div class="who-we-are-action">
+                <a href="/about" class="btn-pill">ABOUT US</a>
+            </div>
+        </section>
+
+        <!-- Horizontal Preview Gallery of Varieties -->
+        <div class="preview-carousel-row">
+            <div class="preview-card">
+                <img src="images/preview-mat-fish.png" alt="Sun drying fish on green mat" class="preview-img" />
+            </div>
+            <div class="preview-card">
+                <img src="images/products/dried-flounder.png" alt="Philippine dried flounder flatfish" class="preview-img" />
+            </div>
+            <div class="preview-card">
+                <img src="images/products/dried-anchovies.png" alt="Crispy dried anchovies dilis" class="preview-img" />
+            </div>
+            <div class="preview-card">
+                <img src="images/preview-bundle-fish.png" alt="Artisan dried fish tied with ribbon" class="preview-img" />
+            </div>
+            <div class="preview-card">
+                <img src="images/preview-bowl-fish.png" alt="Dried fish in rustic wooden bowl" class="preview-img" />
+            </div>
+        </div>
+
+        <!-- What We Do Section Header -->
+        <section class="what-we-do-intro">
+            <h2 class="what-we-do-title">WHAT WE DO</h2>
+            <p class="what-we-do-subtitle">
+                We bring a touch of that simple deliciousness into your world.
+            </p>
+        </section>
+
+        <hr class="home-separator" />
+
+        <!-- Numbered 1, 2, 3 Services Blocks matching Desktop-1.png & Mobile-1.png -->
+        <ServicesSection IsNumberedLayout="true" />
+
+        <!-- Rustic Burlap Dried Fish Feature Banner -->
+        <div class="rustic-banner-wrap">
+            <img src="images/banner-burlap-fish.png" alt="Authentic dried fish on rustic burlap cloth" class="rustic-banner-img" loading="lazy" />
+        </div>
+
+        <!-- Order Now CTA Block -->
+        <OrderCtaBanner Label="ORDER NOW" 
+                        Heading="Discover how we can add a touch of natural dried deliciousness to your next meal." 
+                        ButtonText="ABOUT US" 
+                        ButtonLink="/about" />
+    </div>
+</div>

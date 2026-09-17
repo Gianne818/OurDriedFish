@@ -1,0 +1,21 @@
+<section class="order-cta-section">
+    <span class="section-label cta-label">@Label</span>
+    <h2 class="cta-heading">@Heading</h2>
+    <div class="cta-action">
+        <a href="@ButtonLink" class="btn-pill">@ButtonText</a>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = "ORDER NOW";
+
+    [Parameter]
+    public string Heading { get; set; } = "Discover how we can add a touch of natural dried deliciousness to your next meal.";
+
+    [Parameter]
+    public string ButtonText { get; set; } = "ABOUT US";
+
+    [Parameter]
+    public string ButtonLink { get; set; } = "/about";
+}

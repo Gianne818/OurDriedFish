@@ -1,0 +1,168 @@
+@page "/contact"
+@using System.ComponentModel.DataAnnotations
+
+<PageTitle>Contact & Consultations | Our Dried Fish®</PageTitle>
+
+<div class="contact-page">
+    <div class="site-container">
+        <h1 class="page-title">CONTACT</h1>
+
+        <div class="contact-layout">
+            <!-- Left Info Panel -->
+            <div class="contact-info-panel">
+                <span class="section-label">GET IN TOUCH</span>
+                <h2 class="contact-heading">
+                    We'd love to curate custom dried fish selections for your home, business, or event.
+                </h2>
+                <p class="contact-subtext">
+                    Whether you are seeking wholesale bulk orders for international markets, artisanal supply for restaurants, or family breakfast favorites, our team is at your service.
+                </p>
+
+                <div class="hubs-grid">
+                    <div class="hub-card">
+                        <h4 class="hub-title">CEBU SOURCING HUB</h4>
+                        <p class="hub-detail">Hagnaya Coastal Fishery Racks</p>
+                        <p class="hub-detail">San Remigio & Bantayan Island</p>
+                        <p class="hub-detail">Cebu 6011, Philippines</p>
+                        <p class="hub-phone">+63 (32) 435-8890</p>
+                    </div>
+
+                    <div class="hub-card">
+                        <h4 class="hub-title">MIAMI DISTRIBUTION HUB</h4>
+                        <p class="hub-detail">Artisanal Seafood Import Depot</p>
+                        <p class="hub-detail">Miami Harbor District</p>
+                        <p class="hub-detail">Miami, FL 33132, USA</p>
+                        <p class="hub-phone">+1 (305) 555-0198</p>
+                    </div>
+                </div>
+
+                <div class="hours-card">
+                    <h4 class="hours-title">OPERATING HOURS</h4>
+                    <p><strong>Monday – Friday:</strong> 8:00 AM – 6:00 PM EST / PHT</p>
+                    <p><strong>Saturday:</strong> 9:00 AM – 5:00 PM</p>
+                    <p><strong>Sunday:</strong> 9:00 AM – 2:00 PM (Weekly Fresh Catch Curing)</p>
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="contact-form-panel">
+                <div class="form-card">
+                    <span class="form-badge">DIRECT INQUIRY</span>
+                    <h3 class="form-title">Send Us a Message</h3>
+
+                    @if (IsSubmitted)
+                    {
+                        <div class="form-success-banner">
+                            <div class="success-icon">✓</div>
+                            <h4>Inquiry Successfully Sent!</h4>
+                            <p>Thank you, @Model.Name. We will review your request and get back to you within 24 hours.</p>
+                            <button type="button" class="btn-pill mt-3" @onclick="ResetForm">SEND ANOTHER MESSAGE</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <EditForm Model="@Model" OnValidSubmit="HandleSubmit">
+                            <DataAnnotationsValidator />
+
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <InputText id="fullName" @bind-Value="Model.Name" class="form-input" placeholder="e.g. Teresa Beth" />
+                                <ValidationMessage For="@(() => Model.Name)" class="val-msg" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <InputText id="email" @bind-Value="Model.Email" class="form-input" placeholder="you@example.com" />
+                                <ValidationMessage For="@(() => Model.Email)" class="val-msg" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone / WhatsApp</label>
+                                <InputText id="phone" @bind-Value="Model.Phone" class="form-input" placeholder="+1 (305) 000-0000" />
+                                <ValidationMessage For="@(() => Model.Phone)" class="val-msg" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inquiryType">Inquiry Type</label>
+                                <InputSelect id="inquiryType" @bind-Value="Model.InquiryType" class="form-input form-select">
+                                    <option value="Wholesale">Wholesale & Bulk Orders (Restaurants / Supermarkets)</option>
+                                    <option value="Consultation">Private Culinary Consultation</option>
+                                    <option value="Retail">Retail Customer Support</option>
+                                    <option value="Export">International Shipping & Export</option>
+                                </InputSelect>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <InputTextArea id="message" @bind-Value="Model.Message" rows="4" class="form-input" placeholder="Describe the dried fish items or quantities you are interested in..." />
+                                <ValidationMessage For="@(() => Model.Message)" class="val-msg" />
+                            </div>
+
+                            <button type="submit" class="submit-inquiry-btn">
+                                • SUBMIT INQUIRY
+                            </button>
+                        </EditForm>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h3 class="faq-title">FREQUENTLY ASKED QUESTIONS</h3>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How are your dried fish products cured and processed?</h4>
+                    <p>We practice traditional solar dehydration. Freshly landed fish are thoroughly cleaned with purified saline water, lightly cured with natural sun-evaporated sea salt, and solar-dried on elevated bamboo slats under Cebu's tropical sun.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What is the expected shelf life of vacuum-sealed packages?</h4>
+                    <p>In airtight vacuum packaging kept in a cool, dry pantry, our dried fish stays fresh for up to 6 months. When kept refrigerated or frozen, shelf life extends beyond 12 months with zero loss in flavor or crispiness.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you provide wholesale shipments outside the Philippines?</h4>
+                    <p>Yes, through our Miami distribution center, we ship certified, FDA-compliant dried seafood packages across the United States and North America.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How do you minimize strong cooking aromas when frying?</h4>
+                    <p>We recommend flash-frying in a covered skillet with coconut oil for 45 to 60 seconds, or using an air fryer at 180°C for 3 to 4 minutes with a light oil spray.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@code {
+    private ContactFormModel Model { get; set; } = new();
+    private bool IsSubmitted { get; set; } = false;
+
+    private void HandleSubmit()
+    {
+        IsSubmitted = true;
+    }
+
+    private void ResetForm()
+    {
+        Model = new ContactFormModel();
+        IsSubmitted = false;
+    }
+
+    public class ContactFormModel
+    {
+        [Required(ErrorMessage = "Please provide your full name.")]
+        [StringLength(80, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 80 characters.")]
+        public string Name { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Email address is required.")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
+        public string Email { get; set; } = string.Empty;
+
+        public string Phone { get; set; } = string.Empty;
+
+        public string InquiryType { get; set; } = "Wholesale";
+
+        [Required(ErrorMessage = "Please provide your message or inquiry.")]
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "Message must be at least 10 characters.")]
+        public string Message { get; set; } = string.Empty;
+    }
+}

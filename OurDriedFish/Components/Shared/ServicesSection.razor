@@ -1,0 +1,94 @@
+<section class="services-section @(IsNumberedLayout ? "numbered-layout" : "split-layout")">
+    @if (!IsNumberedLayout)
+    {
+        <div class="services-sidebar-tag">
+            <span class="section-label">SERVICES</span>
+        </div>
+    }
+
+    <div class="services-content">
+        <!-- Service 1: Drying Fish -->
+        <article class="service-block">
+            @if (IsNumberedLayout)
+            {
+                <span class="service-number">1</span>
+                <div class="service-img-wrap">
+                    <img src="images/service-drying-fish.png" alt="Artisan drying fish in the sun" class="service-image" loading="lazy" />
+                </div>
+                <h3 class="service-title">DRYING FISH</h3>
+                <p class="service-desc">Living art of food. For homes, businesses, and events.</p>
+            }
+            else
+            {
+                <div class="split-left">
+                    <h3 class="service-title">DRYING FISH</h3>
+                    <p class="service-desc">Living art of food. For homes, businesses, and events.</p>
+                </div>
+                <div class="split-right">
+                    <div class="service-img-wrap">
+                        <img src="images/service-drying-fish.png" alt="Artisan drying fish in the sun" class="service-image" loading="lazy" />
+                    </div>
+                </div>
+            }
+        </article>
+
+        <hr class="service-separator" />
+
+        <!-- Service 2: Native Fish Delicacies -->
+        <article class="service-block">
+            @if (IsNumberedLayout)
+            {
+                <span class="service-number">2</span>
+                <div class="service-img-wrap">
+                    <img src="images/service-native-delicacies.png" alt="Native fish silog breakfast delicacies" class="service-image" loading="lazy" />
+                </div>
+                <h3 class="service-title">NATIVE FISH DELICACIES</h3>
+                <p class="service-desc">Whether its a simple dish or one with complex recipes, dried fish from the Philippines will always have a spot.</p>
+            }
+            else
+            {
+                <div class="split-left">
+                    <h3 class="service-title">NATIVE FISH DELICACIES</h3>
+                    <p class="service-desc">Whether its a simple dish or one with complex recipes, dried fish from the Philippines will always have a spot.</p>
+                </div>
+                <div class="split-right">
+                    <div class="service-img-wrap">
+                        <img src="images/service-native-delicacies.png" alt="Native fish silog breakfast delicacies" class="service-image" loading="lazy" />
+                    </div>
+                </div>
+            }
+        </article>
+
+        <hr class="service-separator" />
+
+        <!-- Service 3: Custom Fish Selection -->
+        <article class="service-block">
+            @if (IsNumberedLayout)
+            {
+                <span class="service-number">3</span>
+                <div class="service-img-wrap">
+                    <img src="images/service-custom-selection.png" alt="Custom fish selection trays" class="service-image" loading="lazy" />
+                </div>
+                <h3 class="service-title">CUSTOM FISH SELECTION</h3>
+                <p class="service-desc">Your vision, our dried fish. We select special fish selections that are catered to your personal tastes that are both exquisite yet simple and delicious. Whether it's a special event or a simple meal, we will serve you only the most delicious dried fish.</p>
+            }
+            else
+            {
+                <div class="split-left">
+                    <h3 class="service-title">CUSTOM FISH SELECTION</h3>
+                    <p class="service-desc">Your vision, our dried fish. We select special fish selections that are catered to your personal tastes that are both exquisite yet simple and delicious. Whether it's a special event or a simple meal, we will serve you only the most delicious dried fish.</p>
+                </div>
+                <div class="split-right">
+                    <div class="service-img-wrap">
+                        <img src="images/service-custom-selection.png" alt="Custom fish selection trays" class="service-image" loading="lazy" />
+                    </div>
+                </div>
+            }
+        </article>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public bool IsNumberedLayout { get; set; } = false;
+}
