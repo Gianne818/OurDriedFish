@@ -9,6 +9,7 @@ builder.Services.AddRazorComponents()
 
 // Register application domain services
 builder.Services.AddSingleton<IDriedFishRepository, DriedFishRepository>();
+builder.Services.AddScoped<CartService>();
 
 var app = builder.Build();
 

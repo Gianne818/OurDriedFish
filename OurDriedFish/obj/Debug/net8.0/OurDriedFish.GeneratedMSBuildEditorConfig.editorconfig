@@ -50,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/CartDrawer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcQ2FydERyYXdlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/L23Y16W15/Desktop/blazor/OurDriedFish/Components/Shared/OrderCtaBanner.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcT3JkZXJDdGFCYW5uZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
