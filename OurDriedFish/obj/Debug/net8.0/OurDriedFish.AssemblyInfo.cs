@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OurDriedFish")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+449d3d73a47d523928d2385aac9e74638d67cd3d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aa8e1097ce7346ac79a1572550ee732f882658b")]
 [assembly: System.Reflection.AssemblyProductAttribute("OurDriedFish")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OurDriedFish")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

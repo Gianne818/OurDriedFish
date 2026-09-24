@@ -23,7 +23,7 @@
 
                 <!-- Basket / Cart Trigger Button -->
                 <button type="button" 
-                        class="relative inline-flex items-center gap-2 px-3 py-1.5 border border-[#111111] rounded-none hover:bg-[#111111] hover:text-white transition-all cursor-pointer bg-white text-[#111111] group" 
+                        class="relative inline-flex items-center gap-2 px-3 py-1.5 border border-[#111111] rounded-full hover:bg-neutral-50 transition-all cursor-pointer bg-white text-[#111111] group" 
                         @onclick="Cart.ToggleCart"
                         aria-label="View shopping basket">
                     <svg class="w-4 h-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -32,7 +32,7 @@
                     <span class="font-heading text-[11px] font-extrabold tracking-[0.1em] uppercase hidden sm:inline">
                         BASKET
                     </span>
-                    <span class="inline-flex items-center justify-center text-[10px] font-black px-1.5 min-w-[20px] h-[18px] bg-[#111111] text-white group-hover:bg-white group-hover:text-[#111111] transition-colors">
+                    <span class="inline-flex items-center justify-center text-[10px] font-black px-2 min-w-[20px] h-[18px] bg-[#FFC700] text-[#111111] rounded-full transition-colors">
                         @Cart.TotalWeightKg KG
                     </span>
                 </button>

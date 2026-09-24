@@ -12,7 +12,7 @@
         
         @if (QuantityInCart > 0)
         {
-            <div class="absolute top-3 right-3 bg-[#111111] text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
+            <div class="absolute top-3 right-3 bg-[#FFC700] text-[#111111] text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
                 @QuantityInCart KG IN BASKET
             </div>
         }
@@ -50,9 +50,9 @@
             </div>
         </div>
 
-        <!-- Add Button -->
+        <!-- Add Button with Homescreen Yellow -->
         <button type="button" 
-                class="w-full py-2.5 px-3 bg-[#111111] text-white text-xs font-heading font-black tracking-[0.08em] uppercase hover:bg-neutral-800 transition-all cursor-pointer flex items-center justify-center gap-2 rounded-lg"
+                class="w-full py-2.5 px-3 bg-[#FFC700] text-[#111111] text-xs font-heading font-black tracking-[0.08em] uppercase hover:bg-[#E8B400] hover:shadow-[0_4px_15px_rgba(255,199,0,0.4)] transition-all cursor-pointer flex items-center justify-center gap-2 rounded-lg"
                 @onclick="AddToCart">
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
