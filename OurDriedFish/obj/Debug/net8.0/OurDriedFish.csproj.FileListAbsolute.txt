@@ -23,7 +23,6 @@ C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Compon
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Pages\Contact.razor.rz.scp.css
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Pages\Gallery.razor.rz.scp.css
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
-C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Shared\CartDrawer.razor.rz.scp.css
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Shared\OrderCtaBanner.razor.rz.scp.css
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Shared\ProductCard.razor.rz.scp.css
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\scopedcss\Components\Shared\ServicesSection.razor.rz.scp.css
@@ -35,3 +34,4 @@ C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\refint\OurDriedF
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\OurDriedFish.pdb
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\OurDriedFish.genruntimeconfig.cache
 C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\ref\OurDriedFish.dll
+C:\Users\L23Y16W15\Desktop\blazor\OurDriedFish\obj\Debug\net8.0\OurDriedFish.sourcelink.json

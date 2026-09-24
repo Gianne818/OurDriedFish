@@ -1,69 +1,26 @@
 @page "/gallery"
-@page "/catalog"
 @inject IDriedFishRepository FishRepository
-@inject NavigationManager NavigationManager
 
-<PageTitle>Gallery | Our Dried Fish® Seasonal Selections</PageTitle>
+<PageTitle>Gallery | Our Dried Fish®</PageTitle>
 
 <div class="gallery-page">
     <div class="site-container">
-        <!-- Main Page Title matching Desktop.png -->
+        <!-- Main Page Title matching Desktop.png, Tablet.png, Mobile.png -->
         <h1 class="page-title">GALLERY</h1>
 
-        <div class="gallery-toolbar">
-            <div class="sidebar-category-tag">
-                <span class="section-label">SEASONAL DRIED DELICACIES</span>
-            </div>
-
-            <!-- Category Pills Filter -->
-            <div class="category-filter-pills">
-                @foreach (var cat in Categories)
-                {
-                    var isSelected = string.Equals(SelectedCategory, cat, StringComparison.OrdinalIgnoreCase);
-                    <button type="button" 
-                            class="cat-pill @(isSelected ? "active" : "")" 
-                            @onclick="() => FilterByCategory(cat)">
-                        @cat
-                    </button>
-                }
-            </div>
-
-            <!-- In-catalog Search Filter -->
-            <div class="catalog-search-wrap">
-                <input type="text" 
-                       placeholder="Filter by name or flavor..." 
-                       @bind="SearchText" 
-                       @bind:event="oninput" 
-                       class="catalog-search-input" />
-                @if (!string.IsNullOrWhiteSpace(SearchText))
-                {
-                    <button type="button" class="clear-search-btn" @onclick="ClearSearch">&times;</button>
-                }
-            </div>
+        <div class="gallery-header-row">
+            <span class="section-label">SEASONAL DRIED DELICACIES</span>
         </div>
 
-        <!-- Product Grid: 3 columns Desktop, 2 columns Tablet, 1 column Mobile -->
-        @if (!FilteredProducts.Any())
-        {
-            <div class="empty-catalog-state">
-                <h3>No dried delicacies found</h3>
-                <p>We couldn't find any items matching "@SearchText" in @SelectedCategory.</p>
-                <button type="button" class="btn-pill mt-3" @onclick="ResetFilters">
-                    VIEW ALL SELECTIONS
-                </button>
-            </div>
-        }
-        else
-        {
-            <div class="products-grid">
-                @foreach (var product in FilteredProducts)
-                {
-                    <ProductCard Product="@product" />
-                }
-            </div>
-        }
+        <!-- 3x3 Product Grid matching Desktop.png, Tablet.png (2 cols), Mobile.png (1 col) -->
+        <div class="products-grid">
+            @foreach (var product in Products)
+            {
+                <ProductCard Product="@product" />
+            }
+        </div>
 
-        <!-- Services Split Section matching Desktop.png lower half -->
+        <!-- Services Section matching Desktop.png lower half -->
         <ServicesSection IsNumberedLayout="false" />
 
         <!-- Order Now CTA Banner matching Desktop.png -->
@@ -75,73 +32,10 @@
 </div>
 
 @code {
-    [SupplyParameterFromQuery]
-    public string? Query { get; set; }
-
-    private IReadOnlyList<DriedFishItem> AllProducts { get; set; } = new List<DriedFishItem>();
-    private IReadOnlyList<string> Categories { get; set; } = new List<string>();
-
-    private string SelectedCategory { get; set; } = "All";
-    private string SearchText { get; set; } = string.Empty;
+    private IReadOnlyList<DriedFishItem> Products { get; set; } = new List<DriedFishItem>();
 
     protected override async Task OnInitializedAsync()
     {
-        AllProducts = await FishRepository.GetAllAsync();
-        Categories = await FishRepository.GetCategoriesAsync();
-
-        if (!string.IsNullOrWhiteSpace(Query))
-        {
-            SearchText = Query;
-        }
-    }
-
-    protected override void OnParametersSet()
-    {
-        if (!string.IsNullOrWhiteSpace(Query) && Query != SearchText)
-        {
-            SearchText = Query;
-        }
-    }
-
-    private IEnumerable<DriedFishItem> FilteredProducts
-    {
-        get
-        {
-            var items = AllProducts.AsEnumerable();
-
-            if (!string.IsNullOrWhiteSpace(SelectedCategory) && !SelectedCategory.Equals("All", StringComparison.OrdinalIgnoreCase))
-            {
-                items = items.Where(p => p.Category.Equals(SelectedCategory, StringComparison.OrdinalIgnoreCase));
-            }
-
-            if (!string.IsNullOrWhiteSpace(SearchText))
-            {
-                var q = SearchText.Trim();
-                items = items.Where(p =>
-                    p.Name.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                    p.LocalName.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                    p.Description.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                    p.Category.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                    p.TasteProfile.Contains(q, StringComparison.OrdinalIgnoreCase));
-            }
-
-            return items.ToList();
-        }
-    }
-
-    private void FilterByCategory(string category)
-    {
-        SelectedCategory = category;
-    }
-
-    private void ClearSearch()
-    {
-        SearchText = string.Empty;
-    }
-
-    private void ResetFilters()
-    {
-        SelectedCategory = "All";
-        SearchText = string.Empty;
+        Products = await FishRepository.GetAllAsync();
     }
 }

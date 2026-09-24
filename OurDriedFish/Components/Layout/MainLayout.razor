@@ -1,66 +1,31 @@
 @inherits LayoutComponentBase
-@inject CartService CartService
-@inject NavigationManager NavigationManager
-@implements IDisposable
 
 <div class="site-wrapper">
-    <!-- Top Sticky Header matching Figma reference -->
+    <!-- Top Header strictly matching Figma reference -->
     <header class="site-header">
         <div class="site-container header-container">
             <div class="brand-area">
-                <a href="/" class="brand-link">
+                <a href="/" class="brand-link" title="Our Dried Fish Home">
                     <span class="brand-desktop">Our Dried Fish®</span>
                     <span class="brand-mobile">OB.</span>
                 </a>
             </div>
 
-            <!-- Desktop Navigation Links -->
+            <!-- Desktop Navigation Links matching Figma mockups: GALLERY, ABOUT, CONTACT -->
             <nav class="desktop-nav" aria-label="Main Navigation">
-                <NavLink href="" Match="NavLinkMatch.All" class="nav-link">HOME</NavLink>
                 <NavLink href="gallery" class="nav-link">GALLERY</NavLink>
                 <NavLink href="about" class="nav-link">ABOUT</NavLink>
                 <NavLink href="contact" class="nav-link">CONTACT</NavLink>
             </nav>
 
-            <!-- Actions: Search bar & Cart Badge -->
-            <div class="header-actions">
-                <div class="search-box">
-                    <input type="text" 
-                           placeholder="Search dried fish..." 
-                           @bind="SearchQuery" 
-                           @bind:event="oninput" 
-                           @onkeydown="HandleSearchKeyDown" 
-                           class="search-input" />
-                    <button type="button" class="search-btn" @onclick="ExecuteSearch" aria-label="Submit search">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Shopping Cart Icon Button -->
-                <button type="button" class="cart-btn" @onclick="CartService.ToggleDrawer" aria-label="Open shopping cart">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    @if (CartService.TotalItemCount > 0)
-                    {
-                        <span class="cart-badge">@CartService.TotalItemCount</span>
-                    }
-                </button>
-
-                <!-- Mobile Hamburger Toggle -->
-                <button type="button" class="mobile-menu-btn" @onclick="ToggleMobileMenu" aria-label="Toggle navigation menu">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
+            <!-- Mobile Hamburger Toggle -->
+            <button type="button" class="mobile-menu-btn" @onclick="ToggleMobileMenu" aria-label="Toggle navigation menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
         </div>
 
         <!-- Mobile Nav Drawer -->
@@ -82,26 +47,12 @@
         @Body
     </main>
 
-    <!-- Global Cart Drawer Component -->
-    <CartDrawer />
-
-    <!-- Global Footer -->
+    <!-- Global Footer matching Figma -->
     <SiteFooter />
 </div>
 
 @code {
-    private string SearchQuery { get; set; } = string.Empty;
     private bool IsMobileMenuOpen { get; set; } = false;
-
-    protected override void OnInitialized()
-    {
-        CartService.OnChange += StateHasChanged;
-    }
-
-    public void Dispose()
-    {
-        CartService.OnChange -= StateHasChanged;
-    }
 
     private void ToggleMobileMenu()
     {
@@ -111,25 +62,5 @@
     private void CloseMobileMenu()
     {
         IsMobileMenuOpen = false;
-    }
-
-    private void HandleSearchKeyDown(KeyboardEventArgs e)
-    {
-        if (e.Key == "Enter")
-        {
-            ExecuteSearch();
-        }
-    }
-
-    private void ExecuteSearch()
-    {
-        if (!string.IsNullOrWhiteSpace(SearchQuery))
-        {
-            NavigationManager.NavigateTo($"/gallery?query={Uri.EscapeDataString(SearchQuery.Trim())}");
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/gallery");
-        }
     }
 }
