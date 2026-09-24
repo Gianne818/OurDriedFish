@@ -3,24 +3,29 @@
 
 <PageTitle>Gallery | Our Dried Fish®</PageTitle>
 
-<div class="gallery-page">
+<div class="pt-10 pb-8">
     <div class="site-container">
         <!-- Main Page Title matching Desktop.png, Tablet.png, Mobile.png -->
         <h1 class="page-title">GALLERY</h1>
 
-        <div class="gallery-header-row">
-            <span class="section-label">SEASONAL DRIED DELICACIES</span>
+        <!-- 2-Column Section: Sidebar Label on Left (Desktop), Products on Right -->
+        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] lg:grid-cols-[200px_1fr] gap-6 md:gap-10 mb-16 lg:mb-20">
+            <div class="pt-1.5">
+                <span class="section-label">SEASONAL DRIED DELICACIES</span>
+            </div>
+
+            <!-- 3x3 Product Grid matching Desktop.png (3 cols), Tablet.png (2 cols), Mobile.png (1 col) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-9 gap-y-8 sm:gap-y-10 lg:gap-y-12">
+                @foreach (var product in Products)
+                {
+                    <ProductCard Product="@product" />
+                }
+            </div>
         </div>
 
-        <!-- 3x3 Product Grid matching Desktop.png, Tablet.png (2 cols), Mobile.png (1 col) -->
-        <div class="products-grid">
-            @foreach (var product in Products)
-            {
-                <ProductCard Product="@product" />
-            }
-        </div>
+        <hr class="border-0 border-t border-neutral-300 my-12 md:my-16" />
 
-        <!-- Services Section matching Desktop.png lower half -->
+        <!-- Services Section matching Desktop.png lower half: Sidebar "SERVICES" on left, Split Items on right -->
         <ServicesSection IsNumberedLayout="false" />
 
         <!-- Order Now CTA Banner matching Desktop.png -->

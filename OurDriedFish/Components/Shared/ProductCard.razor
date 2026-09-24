@@ -1,11 +1,11 @@
-<div class="product-card">
-    <div class="product-header">
-        <h3 class="product-title">@Product.Name</h3>
-        <span class="product-price-tag">PHP @Product.PricePerKg.ToString("N0")/KG</span>
+<div class="group flex flex-col relative transition-transform duration-300 hover:-translate-y-1">
+    <div class="flex justify-start items-baseline gap-2.5 mb-3">
+        <h3 class="font-heading text-xs sm:text-[13px] font-black tracking-[0.04em] text-[#111111] uppercase m-0">@Product.Name</h3>
+        <span class="text-[10px] sm:text-[11px] font-medium text-neutral-600 whitespace-nowrap uppercase tracking-[0.04em]">PHP @Product.PricePerKg.ToString("N0")/KG</span>
     </div>
 
-    <div class="product-image-wrap">
-        <img src="@Product.ImageUrl" alt="@Product.Name" class="product-image" loading="lazy" />
+    <div class="relative w-full aspect-square overflow-hidden rounded-[18px] sm:rounded-[22px] bg-[#F8F7F4]">
+        <img src="@Product.ImageUrl" alt="@Product.Name" class="w-full h-full object-cover rounded-[18px] sm:rounded-[22px] transition-transform duration-350 group-hover:scale-[1.03]" loading="lazy" />
     </div>
 </div>
 

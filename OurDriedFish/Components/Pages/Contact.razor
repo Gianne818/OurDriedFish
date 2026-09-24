@@ -3,60 +3,60 @@
 
 <PageTitle>Contact & Consultations | Our Dried Fish®</PageTitle>
 
-<div class="contact-page">
+<div class="pt-12 pb-12">
     <div class="site-container">
         <h1 class="page-title">CONTACT</h1>
 
-        <div class="contact-layout">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 sm:mb-20">
             <!-- Left Info Panel -->
-            <div class="contact-info-panel">
+            <div class="flex flex-col">
                 <span class="section-label">GET IN TOUCH</span>
-                <h2 class="contact-heading">
+                <h2 class="font-heading text-[clamp(26px,3.5vw,38px)] font-black leading-tight tracking-[-0.02em] mb-6 text-[#111111]">
                     We'd love to curate custom dried fish selections for your home, business, or event.
                 </h2>
-                <p class="contact-subtext">
+                <p class="text-[15px] leading-relaxed text-neutral-600 mb-10">
                     Whether you are seeking wholesale bulk orders for international markets, artisanal supply for restaurants, or family breakfast favorites, our team is at your service.
                 </p>
 
-                <div class="hubs-grid">
-                    <div class="hub-card">
-                        <h4 class="hub-title">CEBU SOURCING HUB</h4>
-                        <p class="hub-detail">Hagnaya Coastal Fishery Racks</p>
-                        <p class="hub-detail">San Remigio & Bantayan Island</p>
-                        <p class="hub-detail">Cebu 6011, Philippines</p>
-                        <p class="hub-phone">+63 (32) 435-8890</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+                    <div class="bg-[#F9F9F8] p-5 rounded-[20px] border border-neutral-200 shadow-sm">
+                        <h4 class="font-heading text-xs font-black tracking-widest mb-2.5 text-[#111111] uppercase">CEBU SOURCING HUB</h4>
+                        <p class="text-[13px] text-neutral-600 my-0.5">Hagnaya Coastal Fishery Racks</p>
+                        <p class="text-[13px] text-neutral-600 my-0.5">San Remigio & Bantayan Island</p>
+                        <p class="text-[13px] text-neutral-600 my-0.5">Cebu 6011, Philippines</p>
+                        <p class="text-[13px] font-bold text-[#111111] mt-2.5">+63 (32) 435-8890</p>
                     </div>
 
-                    <div class="hub-card">
-                        <h4 class="hub-title">MIAMI DISTRIBUTION HUB</h4>
-                        <p class="hub-detail">Artisanal Seafood Import Depot</p>
-                        <p class="hub-detail">Miami Harbor District</p>
-                        <p class="hub-detail">Miami, FL 33132, USA</p>
-                        <p class="hub-phone">+1 (305) 555-0198</p>
+                    <div class="bg-[#F9F9F8] p-5 rounded-[20px] border border-neutral-200 shadow-sm">
+                        <h4 class="font-heading text-xs font-black tracking-widest mb-2.5 text-[#111111] uppercase">MIAMI DISTRIBUTION HUB</h4>
+                        <p class="text-[13px] text-neutral-600 my-0.5">Artisanal Seafood Import Depot</p>
+                        <p class="text-[13px] text-neutral-600 my-0.5">Miami Harbor District</p>
+                        <p class="text-[13px] text-neutral-600 my-0.5">Miami, FL 33132, USA</p>
+                        <p class="text-[13px] font-bold text-[#111111] mt-2.5">+1 (305) 555-0198</p>
                     </div>
                 </div>
 
-                <div class="hours-card">
-                    <h4 class="hours-title">OPERATING HOURS</h4>
-                    <p><strong>Monday – Friday:</strong> 8:00 AM – 6:00 PM EST / PHT</p>
-                    <p><strong>Saturday:</strong> 9:00 AM – 5:00 PM</p>
-                    <p><strong>Sunday:</strong> 9:00 AM – 2:00 PM (Weekly Fresh Catch Curing)</p>
+                <div class="bg-white border border-neutral-200 p-5 rounded-[20px] text-[13px] text-neutral-700 shadow-sm">
+                    <h4 class="font-heading text-xs font-black tracking-widest mb-2.5 text-[#111111] uppercase">OPERATING HOURS</h4>
+                    <p class="my-1"><strong>Monday – Friday:</strong> 8:00 AM – 6:00 PM EST / PHT</p>
+                    <p class="my-1"><strong>Saturday:</strong> 9:00 AM – 5:00 PM</p>
+                    <p class="my-1"><strong>Sunday:</strong> 9:00 AM – 2:00 PM (Weekly Fresh Catch Curing)</p>
                 </div>
             </div>
 
             <!-- Right Form Panel -->
-            <div class="contact-form-panel">
-                <div class="form-card">
-                    <span class="form-badge">DIRECT INQUIRY</span>
-                    <h3 class="form-title">Send Us a Message</h3>
+            <div class="flex flex-col">
+                <div class="bg-white border border-neutral-200 rounded-[26px] p-6 sm:p-9 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+                    <span class="inline-block text-[10px] font-extrabold tracking-widest bg-[#111111] text-white px-2.5 py-1 rounded-full mb-3 uppercase">DIRECT INQUIRY</span>
+                    <h3 class="font-heading text-2xl font-black mb-6 tracking-tight text-[#111111]">Send Us a Message</h3>
 
                     @if (IsSubmitted)
                     {
-                        <div class="form-success-banner">
-                            <div class="success-icon">✓</div>
-                            <h4>Inquiry Successfully Sent!</h4>
-                            <p>Thank you, @Model.Name. We will review your request and get back to you within 24 hours.</p>
-                            <button type="button" class="btn-pill mt-3" @onclick="ResetForm">SEND ANOTHER MESSAGE</button>
+                        <div class="text-center py-10 px-5 bg-green-50 rounded-[20px] border border-green-200">
+                            <div class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">✓</div>
+                            <h4 class="text-xl font-bold text-green-800 mb-2">Inquiry Successfully Sent!</h4>
+                            <p class="text-sm text-neutral-600">Thank you, @Model.Name. We will review your request and get back to you within 24 hours.</p>
+                            <button type="button" class="btn-pill mt-4" @onclick="ResetForm">SEND ANOTHER MESSAGE</button>
                         </div>
                     }
                     else
@@ -64,27 +64,27 @@
                         <EditForm Model="@Model" OnValidSubmit="HandleSubmit">
                             <DataAnnotationsValidator />
 
-                            <div class="form-group">
-                                <label for="fullName">Full Name</label>
-                                <InputText id="fullName" @bind-Value="Model.Name" class="form-input" placeholder="e.g. Teresa Beth" />
-                                <ValidationMessage For="@(() => Model.Name)" class="val-msg" />
+                            <div class="flex flex-col mb-4">
+                                <label for="fullName" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Full Name</label>
+                                <InputText id="fullName" @bind-Value="Model.Name" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white focus:ring-2 focus:ring-black/5" placeholder="e.g. Teresa Beth" />
+                                <ValidationMessage For="@(() => Model.Name)" class="text-xs text-red-600 mt-1 font-semibold" />
                             </div>
 
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <InputText id="email" @bind-Value="Model.Email" class="form-input" placeholder="you@example.com" />
-                                <ValidationMessage For="@(() => Model.Email)" class="val-msg" />
+                            <div class="flex flex-col mb-4">
+                                <label for="email" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Email Address</label>
+                                <InputText id="email" @bind-Value="Model.Email" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white focus:ring-2 focus:ring-black/5" placeholder="you@example.com" />
+                                <ValidationMessage For="@(() => Model.Email)" class="text-xs text-red-600 mt-1 font-semibold" />
                             </div>
 
-                            <div class="form-group">
-                                <label for="phone">Phone / WhatsApp</label>
-                                <InputText id="phone" @bind-Value="Model.Phone" class="form-input" placeholder="+1 (305) 000-0000" />
-                                <ValidationMessage For="@(() => Model.Phone)" class="val-msg" />
+                            <div class="flex flex-col mb-4">
+                                <label for="phone" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Phone / WhatsApp</label>
+                                <InputText id="phone" @bind-Value="Model.Phone" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white focus:ring-2 focus:ring-black/5" placeholder="+1 (305) 000-0000" />
+                                <ValidationMessage For="@(() => Model.Phone)" class="text-xs text-red-600 mt-1 font-semibold" />
                             </div>
 
-                            <div class="form-group">
-                                <label for="inquiryType">Inquiry Type</label>
-                                <InputSelect id="inquiryType" @bind-Value="Model.InquiryType" class="form-input form-select">
+                            <div class="flex flex-col mb-4">
+                                <label for="inquiryType" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Inquiry Type</label>
+                                <InputSelect id="inquiryType" @bind-Value="Model.InquiryType" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white focus:ring-2 focus:ring-black/5 cursor-pointer">
                                     <option value="Wholesale">Wholesale & Bulk Orders (Restaurants / Supermarkets)</option>
                                     <option value="Consultation">Private Culinary Consultation</option>
                                     <option value="Retail">Retail Customer Support</option>
@@ -92,13 +92,13 @@
                                 </InputSelect>
                             </div>
 
-                            <div class="form-group">
-                                <label for="message">Your Message</label>
-                                <InputTextArea id="message" @bind-Value="Model.Message" rows="4" class="form-input" placeholder="Describe the dried fish items or quantities you are interested in..." />
-                                <ValidationMessage For="@(() => Model.Message)" class="val-msg" />
+                            <div class="flex flex-col mb-4">
+                                <label for="message" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Your Message</label>
+                                <InputTextArea id="message" @bind-Value="Model.Message" rows="4" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white focus:ring-2 focus:ring-black/5" placeholder="Describe the dried fish items or quantities you are interested in..." />
+                                <ValidationMessage For="@(() => Model.Message)" class="text-xs text-red-600 mt-1 font-semibold" />
                             </div>
 
-                            <button type="submit" class="submit-inquiry-btn">
+                            <button type="submit" class="w-full py-3.5 px-6 bg-[#FFC700] hover:bg-[#E8B400] text-black font-heading text-[13px] font-black tracking-wider uppercase rounded-full border-0 cursor-pointer transition hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(255,199,0,0.4)] mt-2.5">
                                 • SUBMIT INQUIRY
                             </button>
                         </EditForm>
@@ -108,24 +108,24 @@
         </div>
 
         <!-- FAQ Section -->
-        <section class="faq-section">
-            <h3 class="faq-title">FREQUENTLY ASKED QUESTIONS</h3>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h4>How are your dried fish products cured and processed?</h4>
-                    <p>We practice traditional solar dehydration. Freshly landed fish are thoroughly cleaned with purified saline water, lightly cured with natural sun-evaporated sea salt, and solar-dried on elevated bamboo slats under Cebu's tropical sun.</p>
+        <section class="pt-8 border-t border-neutral-200 mt-8">
+            <h3 class="font-heading text-[clamp(22px,3vw,30px)] font-black tracking-tight mb-10 text-center text-[#111111]">FREQUENTLY ASKED QUESTIONS</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-neutral-50 p-6 rounded-[20px] border border-neutral-200/60 shadow-sm">
+                    <h4 class="font-heading text-[15px] font-extrabold mb-2.5 text-[#111111]">How are your dried fish products cured and processed?</h4>
+                    <p class="text-[13px] leading-relaxed text-neutral-600 m-0">We practice traditional solar dehydration. Freshly landed fish are thoroughly cleaned with purified saline water, lightly cured with natural sun-evaporated sea salt, and solar-dried on elevated bamboo slats under Cebu's tropical sun.</p>
                 </div>
-                <div class="faq-item">
-                    <h4>What is the expected shelf life of vacuum-sealed packages?</h4>
-                    <p>In airtight vacuum packaging kept in a cool, dry pantry, our dried fish stays fresh for up to 6 months. When kept refrigerated or frozen, shelf life extends beyond 12 months with zero loss in flavor or crispiness.</p>
+                <div class="bg-neutral-50 p-6 rounded-[20px] border border-neutral-200/60 shadow-sm">
+                    <h4 class="font-heading text-[15px] font-extrabold mb-2.5 text-[#111111]">What is the expected shelf life of vacuum-sealed packages?</h4>
+                    <p class="text-[13px] leading-relaxed text-neutral-600 m-0">In airtight vacuum packaging kept in a cool, dry pantry, our dried fish stays fresh for up to 6 months. When kept refrigerated or frozen, shelf life extends beyond 12 months with zero loss in flavor or crispiness.</p>
                 </div>
-                <div class="faq-item">
-                    <h4>Do you provide wholesale shipments outside the Philippines?</h4>
-                    <p>Yes, through our Miami distribution center, we ship certified, FDA-compliant dried seafood packages across the United States and North America.</p>
+                <div class="bg-neutral-50 p-6 rounded-[20px] border border-neutral-200/60 shadow-sm">
+                    <h4 class="font-heading text-[15px] font-extrabold mb-2.5 text-[#111111]">Do you provide wholesale shipments outside the Philippines?</h4>
+                    <p class="text-[13px] leading-relaxed text-neutral-600 m-0">Yes, through our Miami distribution center, we ship certified, FDA-compliant dried seafood packages across the United States and North America.</p>
                 </div>
-                <div class="faq-item">
-                    <h4>How do you minimize strong cooking aromas when frying?</h4>
-                    <p>We recommend flash-frying in a covered skillet with coconut oil for 45 to 60 seconds, or using an air fryer at 180°C for 3 to 4 minutes with a light oil spray.</p>
+                <div class="bg-neutral-50 p-6 rounded-[20px] border border-neutral-200/60 shadow-sm">
+                    <h4 class="font-heading text-[15px] font-extrabold mb-2.5 text-[#111111]">How do you minimize strong cooking aromas when frying?</h4>
+                    <p class="text-[13px] leading-relaxed text-neutral-600 m-0">We recommend flash-frying in a covered skillet with coconut oil for 45 to 60 seconds, or using an air fryer at 180°C for 3 to 4 minutes with a light oil spray.</p>
                 </div>
             </div>
         </section>

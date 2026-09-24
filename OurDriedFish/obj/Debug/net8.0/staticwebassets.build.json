@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W7ZzU2U+nxYm9Fl/LeGpkXZ2PP1cBtVWjCX+vfakjBk=",
+  "Hash": "9AzafIoGx5c/mnxW1nP9GAa1cUZ6Rt9jVM+N90LpPO0=",
   "Source": "OurDriedFish",
   "BasePath": "_content/OurDriedFish",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OurDriedFish.styles.css",
-      "SourceId": "OurDriedFish",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/OurDriedFish",
-      "RelativePath": "OurDriedFish.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OurDriedFish.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OurDriedFish.bundle.scp.css",
-      "SourceId": "OurDriedFish",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/OurDriedFish",
-      "RelativePath": "OurDriedFish.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OurDriedFish.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\app.css",
       "SourceId": "OurDriedFish",
@@ -110,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\css\\site-test.css",
+      "SourceId": "OurDriedFish",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\",
+      "BasePath": "_content/OurDriedFish",
+      "RelativePath": "css/site-test.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site-test.css"
     },
     {
       "Identity": "C:\\Users\\L23Y16W15\\Desktop\\blazor\\OurDriedFish\\wwwroot\\css\\site.css",

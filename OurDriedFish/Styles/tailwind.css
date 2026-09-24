@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #111111;
+    background-color: #FFFFFF;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    color: #111111;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+}
+
+@layer components {
+  /* Layout Container matching Figma Desktop (max 1240px) */
+  .site-container {
+    width: 100%;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .site-container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  /* Page Title */
+  .page-title {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 2.5rem;
+    color: #111111;
+  }
+
+  /* Section Label */
+  .section-label {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #111111;
+    margin-bottom: 1rem;
+    display: block;
+    line-height: 1.4;
+  }
+
+  /* Accent CTA Button (.btn-pill) */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #FFC700;
+    color: #000000;
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 199, 0, 0.35);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-pill::before {
+    content: "•";
+    font-size: 16px;
+    line-height: 1;
+    margin-right: 2px;
+  }
+
+  .btn-pill:hover {
+    background-color: #E8B400;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 199, 0, 0.45);
+    color: #000000;
+  }
+
+  .btn-pill:active {
+    transform: translateY(0);
+  }
+
+  /* Dark CTA Button */
+  .btn-dark-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #111111;
+    color: #FFFFFF;
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-dark-pill:hover {
+    background-color: #333333;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+  }
+}

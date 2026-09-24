@@ -1,25 +1,25 @@
 @inherits LayoutComponentBase
 
-<div class="site-wrapper">
+<div class="flex flex-col min-h-screen bg-white">
     <!-- Top Header strictly matching Figma reference -->
-    <header class="site-header">
-        <div class="site-container header-container">
-            <div class="brand-area">
-                <a href="/" class="brand-link" title="Our Dried Fish Home">
-                    <span class="brand-desktop">Our Dried Fish®</span>
-                    <span class="brand-mobile">OB.</span>
+    <header class="sticky top-0 left-0 right-0 bg-white border-b border-[#111111] z-[1100]">
+        <div class="site-container flex justify-between items-center h-[70px]">
+            <div class="flex items-center">
+                <a href="/" class="inline-flex items-center" title="Our Dried Fish Home">
+                    <span class="hidden md:inline-block font-heading text-[22px] font-black text-[#111111] tracking-[-0.02em]">Our Dried Fish®</span>
+                    <span class="inline-block md:hidden font-heading text-[24px] font-black text-[#111111] tracking-[-0.03em]">OB.</span>
                 </a>
             </div>
 
             <!-- Desktop Navigation Links matching Figma mockups: GALLERY, ABOUT, CONTACT -->
-            <nav class="desktop-nav" aria-label="Main Navigation">
-                <NavLink href="gallery" class="nav-link">GALLERY</NavLink>
-                <NavLink href="about" class="nav-link">ABOUT</NavLink>
-                <NavLink href="contact" class="nav-link">CONTACT</NavLink>
+            <nav class="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+                <NavLink href="gallery" class="font-heading text-[11px] font-extrabold tracking-[0.1em] text-[#111111] uppercase py-1.5 hover:text-neutral-600 transition-colors">GALLERY</NavLink>
+                <NavLink href="about" class="font-heading text-[11px] font-extrabold tracking-[0.1em] text-[#111111] uppercase py-1.5 hover:text-neutral-600 transition-colors">ABOUT</NavLink>
+                <NavLink href="contact" class="font-heading text-[11px] font-extrabold tracking-[0.1em] text-[#111111] uppercase py-1.5 hover:text-neutral-600 transition-colors">CONTACT</NavLink>
             </nav>
 
             <!-- Mobile Hamburger Toggle -->
-            <button type="button" class="mobile-menu-btn" @onclick="ToggleMobileMenu" aria-label="Toggle navigation menu">
+            <button type="button" class="flex md:hidden items-center justify-center w-9 h-9 text-[#111111] bg-transparent border-0 cursor-pointer" @onclick="ToggleMobileMenu" aria-label="Toggle navigation menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -31,19 +31,19 @@
         <!-- Mobile Nav Drawer -->
         @if (IsMobileMenuOpen)
         {
-            <div class="mobile-nav-panel">
-                <div class="mobile-nav-links">
-                    <NavLink href="" Match="NavLinkMatch.All" class="mobile-nav-link" @onclick="CloseMobileMenu">HOME</NavLink>
-                    <NavLink href="gallery" class="mobile-nav-link" @onclick="CloseMobileMenu">GALLERY</NavLink>
-                    <NavLink href="about" class="mobile-nav-link" @onclick="CloseMobileMenu">ABOUT</NavLink>
-                    <NavLink href="contact" class="mobile-nav-link" @onclick="CloseMobileMenu">CONTACT</NavLink>
+            <div class="block md:hidden bg-white border-t border-b border-neutral-200 px-6 py-4">
+                <div class="flex flex-col gap-4">
+                    <NavLink href="" Match="NavLinkMatch.All" class="font-heading text-sm font-extrabold tracking-[0.08em] text-[#111111] uppercase hover:text-[#FFC700] transition-colors" @onclick="CloseMobileMenu">HOME</NavLink>
+                    <NavLink href="gallery" class="font-heading text-sm font-extrabold tracking-[0.08em] text-[#111111] uppercase hover:text-[#FFC700] transition-colors" @onclick="CloseMobileMenu">GALLERY</NavLink>
+                    <NavLink href="about" class="font-heading text-sm font-extrabold tracking-[0.08em] text-[#111111] uppercase hover:text-[#FFC700] transition-colors" @onclick="CloseMobileMenu">ABOUT</NavLink>
+                    <NavLink href="contact" class="font-heading text-sm font-extrabold tracking-[0.08em] text-[#111111] uppercase hover:text-[#FFC700] transition-colors" @onclick="CloseMobileMenu">CONTACT</NavLink>
                 </div>
             </div>
         }
     </header>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="flex-1">
         @Body
     </main>
 

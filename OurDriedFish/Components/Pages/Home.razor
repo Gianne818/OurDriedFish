@@ -1,70 +1,69 @@
 @page "/"
 
-
 <PageTitle>Our Dried Fish® | Authentic Philippine Dried Delicacies</PageTitle>
 
-<div class="home-page">
+<div class="py-8">
     <div class="site-container">
         <!-- Sub-brand Center Heading matching Desktop-1.png -->
-        <div class="hero-brand-header">
-            <h1 class="hero-brand-title">Our Dried Fish®</h1>
+        <div class="text-center mb-6">
+            <h1 class="font-heading text-[clamp(20px,3vw,26px)] font-black text-[#111111] tracking-tight">Our Dried Fish®</h1>
         </div>
 
         <!-- Master Hero Image Banner -->
-        <div class="hero-banner-wrap">
+        <div class="w-full max-h-[580px] rounded-[26px] overflow-hidden mb-14 shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-[#F8F7F4]">
             <picture>
                 <source media="(max-width: 600px)" srcset="images/hero-grilled-fish-mobile.png" />
                 <source media="(max-width: 900px)" srcset="images/hero-grilled-fish-tablet.png" />
-                <img src="images/hero-grilled-fish.png" alt="Grilled dried fish dish with chopsticks" class="hero-banner-img" />
+                <img src="images/hero-grilled-fish.png" alt="Grilled dried fish dish with chopsticks" class="w-full h-full max-h-[580px] object-cover rounded-[26px]" />
             </picture>
         </div>
 
         <!-- Who We Are Intro Section -->
-        <section class="who-we-are-section">
+        <section class="text-center max-w-[640px] mx-auto my-14 px-4">
             <span class="section-label">WHO WE ARE</span>
-            <h2 class="who-we-are-heading">
+            <h2 class="font-heading text-[clamp(24px,3.5vw,36px)] font-black tracking-[-0.02em] leading-tight mb-7 text-[#111111]">
                 We're Our Dried Fish® and we're here to help you find your dried delicious flavor.
             </h2>
-            <div class="who-we-are-action">
+            <div class="flex justify-center">
                 <a href="/about" class="btn-pill">ABOUT US</a>
             </div>
         </section>
 
         <!-- Horizontal Preview Gallery of Varieties -->
-        <div class="preview-carousel-row">
-            <div class="preview-card">
-                <img src="images/preview-mat-fish.png" alt="Sun drying fish on green mat" class="preview-img" />
+        <div class="flex gap-4 overflow-x-auto py-4 pb-8 snap-x snap-mandatory [scrollbar-width:thin]">
+            <div class="flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(20%-13px)] min-w-[150px] aspect-square rounded-[20px] overflow-hidden snap-start shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-neutral-50 transition-transform duration-200 hover:-translate-y-1">
+                <img src="images/preview-mat-fish.png" alt="Sun drying fish on green mat" class="w-full h-full object-cover rounded-[20px]" />
             </div>
-            <div class="preview-card">
-                <img src="images/products/dried-flounder.png" alt="Philippine dried flounder flatfish" class="preview-img" />
+            <div class="flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(20%-13px)] min-w-[150px] aspect-square rounded-[20px] overflow-hidden snap-start shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-neutral-50 transition-transform duration-200 hover:-translate-y-1">
+                <img src="images/products/dried-flounder.png" alt="Philippine dried flounder flatfish" class="w-full h-full object-cover rounded-[20px]" />
             </div>
-            <div class="preview-card">
-                <img src="images/products/dried-anchovies.png" alt="Crispy dried anchovies dilis" class="preview-img" />
+            <div class="flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(20%-13px)] min-w-[150px] aspect-square rounded-[20px] overflow-hidden snap-start shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-neutral-50 transition-transform duration-200 hover:-translate-y-1">
+                <img src="images/products/dried-anchovies.png" alt="Crispy dried anchovies dilis" class="w-full h-full object-cover rounded-[20px]" />
             </div>
-            <div class="preview-card">
-                <img src="images/preview-bundle-fish.png" alt="Artisan dried fish tied with ribbon" class="preview-img" />
+            <div class="flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(20%-13px)] min-w-[150px] aspect-square rounded-[20px] overflow-hidden snap-start shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-neutral-50 transition-transform duration-200 hover:-translate-y-1">
+                <img src="images/preview-bundle-fish.png" alt="Artisan dried fish tied with ribbon" class="w-full h-full object-cover rounded-[20px]" />
             </div>
-            <div class="preview-card">
-                <img src="images/preview-bowl-fish.png" alt="Dried fish in rustic wooden bowl" class="preview-img" />
+            <div class="flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-11px)] md:w-[calc(20%-13px)] min-w-[150px] aspect-square rounded-[20px] overflow-hidden snap-start shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-neutral-50 transition-transform duration-200 hover:-translate-y-1">
+                <img src="images/preview-bowl-fish.png" alt="Dried fish in rustic wooden bowl" class="w-full h-full object-cover rounded-[20px]" />
             </div>
         </div>
 
         <!-- What We Do Section Header -->
-        <section class="what-we-do-intro">
-            <h2 class="what-we-do-title">WHAT WE DO</h2>
-            <p class="what-we-do-subtitle">
+        <section class="text-center mt-16 mb-8">
+            <h2 class="font-heading text-[clamp(28px,4vw,42px)] font-black tracking-[-0.02em] mb-3 text-[#111111]">WHAT WE DO</h2>
+            <p class="text-[15px] text-neutral-700">
                 We bring a touch of that simple deliciousness into your world.
             </p>
         </section>
 
-        <hr class="home-separator" />
+        <hr class="border-0 border-t border-neutral-300 my-14" />
 
         <!-- Numbered 1, 2, 3 Services Blocks matching Desktop-1.png & Mobile-1.png -->
         <ServicesSection IsNumberedLayout="true" />
 
         <!-- Rustic Burlap Dried Fish Feature Banner -->
-        <div class="rustic-banner-wrap">
-            <img src="images/banner-burlap-fish.png" alt="Authentic dried fish on rustic burlap cloth" class="rustic-banner-img" loading="lazy" />
+        <div class="w-full h-[320px] md:h-[480px] rounded-[26px] overflow-hidden mt-18 mb-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)] bg-[#1A1A1A]">
+            <img src="images/banner-burlap-fish.png" alt="Authentic dried fish on rustic burlap cloth" class="w-full h-full object-cover rounded-[26px]" loading="lazy" />
         </div>
 
         <!-- Order Now CTA Block -->
