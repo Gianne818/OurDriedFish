@@ -1,0 +1,89 @@
+@page "/reviews"
+@using OurDriedFish.Models
+@inject IReviewService ReviewService
+@inject IDriedFishRepository FishRepository
+
+<PageTitle>Reviews | Our Dried Fish®</PageTitle>
+
+<div class="pt-10 pb-12">
+    <div class="site-container">
+        <h1 class="page-title">REVIEWS</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] lg:grid-cols-[200px_1fr] gap-6 md:gap-10 mb-12">
+            <div class="pt-1.5">
+                <span class="section-label">CUSTOMER RATINGS</span>
+            </div>
+
+            <div>
+                <p class="text-[15px] text-neutral-700 mb-6">
+                    @ReviewCount @(ReviewCount == 1 ? "review" : "reviews")
+                    @if (AverageRating > 0)
+                    {
+                        <span class="font-bold text-[#111111]">· @AverageRating.ToString("0.0") / 5 average</span>
+                    }
+                </p>
+
+                @if (Reviews.Count == 0)
+                {
+                    <div class="bg-neutral-50 border border-neutral-200 rounded-[20px] p-8 text-center">
+                        <p class="text-sm text-neutral-600 m-0">No reviews yet. Check back soon.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        @foreach (var review in Reviews)
+                        {
+                            <article class="bg-white border border-neutral-200 rounded-[20px] p-5 shadow-sm flex flex-col">
+                                <div class="flex items-center gap-1 mb-2" aria-label="@review.Rating out of 5 stars">
+                                    @for (var i = 1; i <= 5; i++)
+                                    {
+                                        <span class="@(i <= review.Rating ? "text-[#FFC700]" : "text-neutral-300") text-base leading-none">★</span>
+                                    }
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(review.Title))
+                                {
+                                    <h3 class="font-heading text-[15px] font-extrabold text-[#111111] mb-1">@review.Title</h3>
+                                }
+                                <span class="inline-block self-start text-[10px] font-extrabold tracking-widest uppercase bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-full mb-2.5">
+                                    @GetProductLabel(review.ProductId)
+                                </span>
+                                <p class="text-[13px] leading-relaxed text-neutral-600 flex-1">@review.Comment</p>
+                                <p class="text-xs text-neutral-500 mt-3 mb-0">
+                                    <strong class="text-[#111111]">@review.AuthorName</strong>
+                                    · @review.CreatedAt.ToLocalTime().ToString("MMM d, yyyy")
+                                </p>
+                            </article>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private IReadOnlyList<ProductReview> Reviews { get; set; } = new List<ProductReview>();
+    private Dictionary<int, string> ProductNames { get; set; } = new();
+    private double AverageRating { get; set; }
+    private int ReviewCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var products = await FishRepository.GetAllAsync();
+        ProductNames = products.ToDictionary(p => p.Id, p => p.Name);
+
+        Reviews = await ReviewService.GetAllAsync();
+        AverageRating = await ReviewService.GetAverageRatingAsync();
+        ReviewCount = await ReviewService.GetReviewCountAsync();
+    }
+
+    private string GetProductLabel(int? productId)
+    {
+        if (!productId.HasValue)
+        {
+            return "General feedback";
+        }
+        return ProductNames.TryGetValue(productId.Value, out var name) ? name : "Product";
+    }
+}
