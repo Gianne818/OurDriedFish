@@ -9,30 +9,72 @@
     <div class="site-container">
         <h1 class="page-title">REVIEWS</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] lg:grid-cols-[200px_1fr] gap-6 md:gap-10 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] lg:grid-cols-[200px_1fr] gap-6 md:gap-10 mb-10">
             <div class="pt-1.5">
                 <span class="section-label">CUSTOMER RATINGS</span>
             </div>
 
             <div>
-                <p class="text-[15px] text-neutral-700 mb-6">
-                    @ReviewCount @(ReviewCount == 1 ? "review" : "reviews")
-                    @if (AverageRating > 0)
-                    {
-                        <span class="font-bold text-[#111111]">· @AverageRating.ToString("0.0") / 5 average</span>
-                    }
-                </p>
+                <!-- Summary -->
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <div class="bg-[#111111] text-white px-4 py-2.5 rounded-full text-sm font-bold">
+                        ★ @AverageRating.ToString("0.0") / 5
+                    </div>
+                    <p class="text-[15px] text-neutral-700 m-0">
+                        @ReviewCount @(ReviewCount == 1 ? "review" : "reviews")
+                    </p>
+                </div>
 
-                @if (ReviewList.Count == 0)
+                @if (ProductSummaries.Count > 0)
+                {
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        @foreach (var summary in ProductSummaries)
+                        {
+                            <span class="inline-block text-[11px] font-bold bg-neutral-100 text-neutral-700 px-3 py-1.5 rounded-full">
+                                @summary.Value.Name · ★ @summary.Value.Average.ToString("0.0") (@summary.Value.Count)
+                            </span>
+                        }
+                    </div>
+                }
+
+                <!-- Filters -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                    <div class="flex flex-col">
+                        <label for="filterProduct" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Filter by product</label>
+                        <select id="filterProduct" @bind="filterProductId" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
+                            <option value="all">All reviews</option>
+                            <option value="general">General feedback</option>
+                            @foreach (var product in Products)
+                            {
+                                <option value="@product.Id.ToString()">@product.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="sortBy" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Sort by</label>
+                        <select id="sortBy" @bind="sortBy" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
+                            <option value="newest">Newest first</option>
+                            <option value="highest">Highest rated</option>
+                            <option value="lowest">Lowest rated</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
+            <!-- Review list -->
+            <div>
+                @if (FilteredReviews.Count == 0)
                 {
                     <div class="bg-neutral-50 border border-neutral-200 rounded-[20px] p-8 text-center">
-                        <p class="text-sm text-neutral-600 m-0">No reviews yet. Check back soon.</p>
+                        <p class="text-sm text-neutral-600 m-0">No reviews match this filter yet. Be the first to write one.</p>
                     </div>
                 }
                 else
                 {
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        @foreach (var review in ReviewList)
+                        @foreach (var review in FilteredReviews)
                         {
                             <article class="bg-white border border-neutral-200 rounded-[20px] p-5 shadow-sm flex flex-col">
                                 <div class="flex items-center gap-1 mb-2" aria-label="@review.Rating out of 5 stars">
@@ -58,24 +100,164 @@
                     </div>
                 }
             </div>
+
+            <!-- Submission form -->
+            <div class="bg-white border border-neutral-200 rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.06)] lg:sticky lg:top-24">
+                <span class="inline-block text-[10px] font-extrabold tracking-widest bg-[#111111] text-white px-2.5 py-1 rounded-full mb-3 uppercase">WRITE A REVIEW</span>
+                <h3 class="font-heading text-2xl font-black mb-6 tracking-tight text-[#111111]">Share your taste</h3>
+
+                @if (IsSubmitted)
+                {
+                    <div class="text-center py-10 px-5 bg-green-50 rounded-[20px] border border-green-200">
+                        <div class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">✓</div>
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Review posted!</h4>
+                        <p class="text-sm text-neutral-600">Thank you, @LastAuthorName. Your rating helps fellow dried fish lovers.</p>
+                        <button type="button" class="btn-pill mt-4" @onclick="ResetForm">WRITE ANOTHER REVIEW</button>
+                    </div>
+                }
+                else
+                {
+                    <EditForm Model="@FormModel" OnValidSubmit="HandleSubmit">
+                        <DataAnnotationsValidator />
+
+                        <div class="flex flex-col mb-4">
+                            <label for="reviewProduct" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Product</label>
+                            <InputSelect id="reviewProduct" @bind-Value="formProductId" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
+                                <option value="general">General feedback</option>
+                                @foreach (var product in Products)
+                                {
+                                    <option value="@product.Id.ToString()">@product.Name</option>
+                                }
+                            </InputSelect>
+                        </div>
+
+                        <div class="flex flex-col mb-4">
+                            <label for="reviewerName" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Your name</label>
+                            <InputText id="reviewerName" @bind-Value="FormModel.AuthorName" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white" placeholder="e.g. Teresa Beth" />
+                            <ValidationMessage For="@(() => FormModel.AuthorName)" class="text-xs text-red-600 mt-1 font-semibold" />
+                        </div>
+
+                        <div class="flex flex-col mb-4">
+                            <span class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Star rating</span>
+                            <div class="flex items-center gap-1">
+                                @for (var i = 1; i <= 5; i++)
+                                {
+                                    var starValue = i;
+                                    <button type="button"
+                                            @onclick="() => FormModel.Rating = starValue"
+                                            aria-label="Rate @starValue stars"
+                                            class="@(starValue <= FormModel.Rating ? "text-[#FFC700]" : "text-neutral-300") text-3xl leading-none bg-transparent border-0 cursor-pointer hover:scale-110 transition-transform p-0.5">★</button>
+                                }
+                            </div>
+                            <ValidationMessage For="@(() => FormModel.Rating)" class="text-xs text-red-600 mt-1 font-semibold" />
+                        </div>
+
+                        <div class="flex flex-col mb-4">
+                            <label for="reviewTitle" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Title <span class="font-semibold normal-case text-neutral-400">(optional)</span></label>
+                            <InputText id="reviewTitle" @bind-Value="FormModel.Title" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white" placeholder="Sum it up in a few words" />
+                            <ValidationMessage For="@(() => FormModel.Title)" class="text-xs text-red-600 mt-1 font-semibold" />
+                        </div>
+
+                        <div class="flex flex-col mb-4">
+                            <label for="reviewComment" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Your review</label>
+                            <InputTextArea id="reviewComment" @bind-Value="FormModel.Comment" rows="4" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none transition focus:border-[#111111] focus:bg-white" placeholder="How was the taste, texture, packaging...?" />
+                            <ValidationMessage For="@(() => FormModel.Comment)" class="text-xs text-red-600 mt-1 font-semibold" />
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 px-6 bg-[#FFC700] hover:bg-[#E8B400] text-black font-heading text-[13px] font-black tracking-wider uppercase rounded-full border-0 cursor-pointer transition hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(255,199,0,0.4)] mt-2.5">
+                            • POST REVIEW
+                        </button>
+                    </EditForm>
+                }
+            </div>
         </div>
     </div>
 </div>
 
 @code {
     private IReadOnlyList<ProductReview> ReviewList { get; set; } = new List<ProductReview>();
+    private IReadOnlyList<DriedFishItem> Products { get; set; } = new List<DriedFishItem>();
     private Dictionary<int, string> ProductNames { get; set; } = new();
     private double AverageRating { get; set; }
     private int ReviewCount { get; set; }
+    private Dictionary<int, (string Name, double Average, int Count)> ProductSummaries { get; set; } = new();
+
+    private string filterProductId = "all";
+    private string sortBy = "newest";
+
+    private ProductReview FormModel { get; set; } = new() { Rating = 5 };
+    private string formProductId = "general";
+    private bool IsSubmitted { get; set; }
+    private string LastAuthorName { get; set; } = string.Empty;
+
+    private IReadOnlyList<ProductReview> FilteredReviews
+    {
+        get
+        {
+            var query = ReviewList.AsEnumerable();
+
+            if (filterProductId == "general")
+            {
+                query = query.Where(r => !r.ProductId.HasValue);
+            }
+            else if (filterProductId != "all" && int.TryParse(filterProductId, out var pid))
+            {
+                query = query.Where(r => r.ProductId == pid);
+            }
+
+            query = sortBy switch
+            {
+                "highest" => query.OrderByDescending(r => r.Rating).ThenByDescending(r => r.CreatedAt),
+                "lowest" => query.OrderBy(r => r.Rating).ThenByDescending(r => r.CreatedAt),
+                _ => query.OrderByDescending(r => r.CreatedAt),
+            };
+
+            return query.ToList();
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
-        var products = await FishRepository.GetAllAsync();
-        ProductNames = products.ToDictionary(p => p.Id, p => p.Name);
+        Products = await FishRepository.GetAllAsync();
+        ProductNames = Products.ToDictionary(p => p.Id, p => p.Name);
 
+        await RefreshReviewsAsync();
+    }
+
+    private async Task RefreshReviewsAsync()
+    {
         ReviewList = await ReviewService.GetAllAsync();
         AverageRating = await ReviewService.GetAverageRatingAsync();
         ReviewCount = await ReviewService.GetReviewCountAsync();
+
+        ProductSummaries = ReviewList
+            .Where(r => r.ProductId.HasValue)
+            .GroupBy(r => r.ProductId!.Value)
+            .ToDictionary(
+                g => g.Key,
+                g => (
+                    Name: ProductNames.TryGetValue(g.Key, out var name) ? name : "Product",
+                    Average: Math.Round(g.Average(r => r.Rating), 1),
+                    Count: g.Count()
+                ));
+    }
+
+    private async Task HandleSubmit()
+    {
+        FormModel.ProductId = formProductId == "general" ? null : int.Parse(formProductId);
+
+        await ReviewService.AddAsync(FormModel);
+        LastAuthorName = FormModel.AuthorName;
+        IsSubmitted = true;
+
+        await RefreshReviewsAsync();
+    }
+
+    private void ResetForm()
+    {
+        FormModel = new ProductReview { Rating = 5 };
+        formProductId = "general";
+        IsSubmitted = false;
     }
 
     private string GetProductLabel(int? productId)
