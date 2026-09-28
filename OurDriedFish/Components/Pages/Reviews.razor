@@ -77,11 +77,8 @@
                         @foreach (var review in FilteredReviews)
                         {
                             <article class="bg-white border border-neutral-200 rounded-[20px] p-5 shadow-sm flex flex-col">
-                                <div class="flex items-center gap-1 mb-2" aria-label="@review.Rating out of 5 stars">
-                                    @for (var i = 1; i <= 5; i++)
-                                    {
-                                        <span class="@(i <= review.Rating ? "text-[#FFC700]" : "text-neutral-300") text-base leading-none">★</span>
-                                    }
+                                <div class="mb-2">
+                                    <StarRating Rating="@review.Rating" />
                                 </div>
                                 @if (!string.IsNullOrWhiteSpace(review.Title))
                                 {
@@ -139,16 +136,7 @@
 
                         <div class="flex flex-col mb-4">
                             <span class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Star rating</span>
-                            <div class="flex items-center gap-1">
-                                @for (var i = 1; i <= 5; i++)
-                                {
-                                    var starValue = i;
-                                    <button type="button"
-                                            @onclick="() => FormModel.Rating = starValue"
-                                            aria-label="Rate @starValue stars"
-                                            class="@(starValue <= FormModel.Rating ? "text-[#FFC700]" : "text-neutral-300") text-3xl leading-none bg-transparent border-0 cursor-pointer hover:scale-110 transition-transform p-0.5">★</button>
-                                }
-                            </div>
+                            <StarRating Rating="@FormModel.Rating" RatingChanged="@((int v) => FormModel.Rating = v)" Interactive="true" SizeClass="text-3xl" />
                             <ValidationMessage For="@(() => FormModel.Rating)" class="text-xs text-red-600 mt-1 font-semibold" />
                         </div>
 

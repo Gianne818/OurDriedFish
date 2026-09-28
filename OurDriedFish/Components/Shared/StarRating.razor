@@ -1,0 +1,37 @@
+<div class="flex items-center gap-1" role="@(Interactive ? "radiogroup" : "img")" aria-label="@Rating out of 5 stars">
+    @for (var i = 1; i <= 5; i++)
+    {
+        var starValue = i;
+        var filled = starValue <= Rating;
+        if (Interactive)
+        {
+            <button type="button"
+                    @onclick="() => SelectRatingAsync(starValue)"
+                    aria-label="Rate @starValue stars"
+                    class="@(filled ? "text-[#FFC700]" : "text-neutral-300") @SizeClass leading-none bg-transparent border-0 cursor-pointer hover:scale-110 transition-transform p-0.5">★</button>
+        }
+        else
+        {
+            <span class="@(filled ? "text-[#FFC700]" : "text-neutral-300") @SizeClass leading-none">★</span>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Rating { get; set; }
+
+    [Parameter]
+    public bool Interactive { get; set; }
+
+    [Parameter]
+    public string SizeClass { get; set; } = "text-base";
+
+    [Parameter]
+    public EventCallback<int> RatingChanged { get; set; }
+
+    private Task SelectRatingAsync(int value)
+    {
+        return RatingChanged.InvokeAsync(value);
+    }
+}
