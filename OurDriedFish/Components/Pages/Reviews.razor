@@ -23,7 +23,7 @@
                     }
                 </p>
 
-                @if (Reviews.Count == 0)
+                @if (ReviewList.Count == 0)
                 {
                     <div class="bg-neutral-50 border border-neutral-200 rounded-[20px] p-8 text-center">
                         <p class="text-sm text-neutral-600 m-0">No reviews yet. Check back soon.</p>
@@ -32,7 +32,7 @@
                 else
                 {
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        @foreach (var review in Reviews)
+                        @foreach (var review in ReviewList)
                         {
                             <article class="bg-white border border-neutral-200 rounded-[20px] p-5 shadow-sm flex flex-col">
                                 <div class="flex items-center gap-1 mb-2" aria-label="@review.Rating out of 5 stars">
@@ -63,7 +63,7 @@
 </div>
 
 @code {
-    private IReadOnlyList<ProductReview> Reviews { get; set; } = new List<ProductReview>();
+    private IReadOnlyList<ProductReview> ReviewList { get; set; } = new List<ProductReview>();
     private Dictionary<int, string> ProductNames { get; set; } = new();
     private double AverageRating { get; set; }
     private int ReviewCount { get; set; }
@@ -73,7 +73,7 @@
         var products = await FishRepository.GetAllAsync();
         ProductNames = products.ToDictionary(p => p.Id, p => p.Name);
 
-        Reviews = await ReviewService.GetAllAsync();
+        ReviewList = await ReviewService.GetAllAsync();
         AverageRating = await ReviewService.GetAverageRatingAsync();
         ReviewCount = await ReviewService.GetReviewCountAsync();
     }
