@@ -21,3 +21,4 @@ obj/
 *.user
 *.suo
 .vs/
+docs/
