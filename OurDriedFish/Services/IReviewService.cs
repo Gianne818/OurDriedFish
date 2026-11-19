@@ -4,8 +4,8 @@ namespace OurDriedFish.Services;
 
 public interface IReviewService
 {
-    Task<IReadOnlyList<ProductReview>> GetAllAsync();
-    Task<double> GetAverageRatingAsync(int? productId = null);
-    Task<int> GetReviewCountAsync(int? productId = null);
+    Task<IReadOnlyList<ProductReview>> GetAllAsync(int? productId = null, bool generalOnly = false, string sortBy = "newest");
     Task<ProductReview> AddAsync(ProductReview review);
+    Task UpdateAsync(ProductReview review);
+    Task DeleteAsync(int id);
 }

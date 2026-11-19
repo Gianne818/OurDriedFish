@@ -9,6 +9,13 @@
     <div class="site-container">
         <h1 class="page-title">REVIEWS</h1>
 
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <div class="mb-6 p-4 rounded-2xl border border-red-200 bg-red-50 text-sm text-red-800">
+                <strong>Database error:</strong> @ErrorMessage
+            </div>
+        }
+
         <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] lg:grid-cols-[200px_1fr] gap-6 md:gap-10 mb-10">
             <div class="pt-1.5">
                 <span class="section-label">CUSTOMER RATINGS</span>
@@ -37,11 +44,11 @@
                     </div>
                 }
 
-                <!-- Filters -->
+                <!-- Filters (Habit 2: queries Supabase with Where/Order before Get) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                     <div class="flex flex-col">
                         <label for="filterProduct" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Filter by product</label>
-                        <select id="filterProduct" @bind="filterProductId" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
+                        <select id="filterProduct" @bind="filterProductId" @bind:after="RefreshReviewsAsync" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
                             <option value="all">All reviews</option>
                             <option value="general">General feedback</option>
                             @foreach (var product in Products)
@@ -52,7 +59,7 @@
                     </div>
                     <div class="flex flex-col">
                         <label for="sortBy" class="text-xs font-black uppercase tracking-wider mb-1.5 text-neutral-800">Sort by</label>
-                        <select id="sortBy" @bind="sortBy" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
+                        <select id="sortBy" @bind="sortBy" @bind:after="RefreshReviewsAsync" class="w-full px-4 py-3 rounded-md border border-neutral-300 bg-neutral-50 text-sm text-[#111111] outline-none cursor-pointer">
                             <option value="newest">Newest first</option>
                             <option value="highest">Highest rated</option>
                             <option value="lowest">Lowest rated</option>
@@ -65,7 +72,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
             <!-- Review list -->
             <div>
-                @if (FilteredReviews.Count == 0)
+                @if (IsLoading)
+                {
+                    <div class="bg-neutral-50 border border-neutral-200 rounded-[20px] p-8 text-center">
+                        <p class="text-sm text-neutral-500 m-0">Loading reviews from Supabase...</p>
+                    </div>
+                }
+                else if (ReviewList.Count == 0)
                 {
                     <div class="bg-neutral-50 border border-neutral-200 rounded-[20px] p-8 text-center">
                         <p class="text-sm text-neutral-600 m-0">No reviews match this filter yet. Be the first to write one.</p>
@@ -74,11 +87,25 @@
                 else
                 {
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        @foreach (var review in FilteredReviews)
+                        @foreach (var review in ReviewList)
                         {
                             <article class="bg-white border border-neutral-200 rounded-[20px] p-5 shadow-sm flex flex-col">
-                                <div class="mb-2">
+                                <div class="flex items-center justify-between gap-2 mb-2">
                                     <StarRating Rating="@review.Rating" />
+                                    <div class="flex items-center gap-2">
+                                        <button type="button"
+                                                class="text-[11px] font-bold uppercase text-neutral-500 hover:text-[#111111] disabled:opacity-40"
+                                                disabled="@IsSaving"
+                                                @onclick="() => StartEditReview(review)">
+                                            Edit
+                                        </button>
+                                        <button type="button"
+                                                class="text-[11px] font-bold uppercase text-red-600 hover:text-red-800 disabled:opacity-40"
+                                                disabled="@IsSaving"
+                                                @onclick="() => DeleteReviewAsync(review.Id)">
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
                                 @if (!string.IsNullOrWhiteSpace(review.Title))
                                 {
@@ -98,16 +125,20 @@
                 }
             </div>
 
-            <!-- Submission form -->
+            <!-- Submission / Edit form -->
             <div class="bg-white border border-neutral-200 rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.06)] lg:sticky lg:top-24">
-                <span class="inline-block text-[10px] font-extrabold tracking-widest bg-[#111111] text-white px-2.5 py-1 rounded-full mb-3 uppercase">WRITE A REVIEW</span>
-                <h3 class="font-heading text-2xl font-black mb-6 tracking-tight text-[#111111]">Share your taste</h3>
+                <span class="inline-block text-[10px] font-extrabold tracking-widest bg-[#111111] text-white px-2.5 py-1 rounded-full mb-3 uppercase">
+                    @(EditingReviewId.HasValue ? "EDIT REVIEW" : "WRITE A REVIEW")
+                </span>
+                <h3 class="font-heading text-2xl font-black mb-6 tracking-tight text-[#111111]">
+                    @(EditingReviewId.HasValue ? "Update your review" : "Share your taste")
+                </h3>
 
                 @if (IsSubmitted)
                 {
                     <div class="text-center py-10 px-5 bg-green-50 rounded-[20px] border border-green-200">
                         <div class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">✓</div>
-                        <h4 class="text-xl font-bold text-green-800 mb-2">Review posted!</h4>
+                        <h4 class="text-xl font-bold text-green-800 mb-2">@(WasEdited ? "Review updated!" : "Review posted!")</h4>
                         <p class="text-sm text-neutral-600">Thank you, @LastAuthorName. Your rating helps fellow dried fish lovers.</p>
                         <button type="button" class="btn-pill mt-4" @onclick="ResetForm">WRITE ANOTHER REVIEW</button>
                     </div>
@@ -152,9 +183,20 @@
                             <ValidationMessage For="@(() => FormModel.Comment)" class="text-xs text-red-600 mt-1 font-semibold" />
                         </div>
 
-                        <button type="submit" class="w-full py-3.5 px-6 bg-[#FFC700] hover:bg-[#E8B400] text-black font-heading text-[13px] font-black tracking-wider uppercase rounded-full border-0 cursor-pointer transition hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(255,199,0,0.4)] mt-2.5">
-                            • POST REVIEW
+                        <button type="submit"
+                                disabled="@IsSaving"
+                                class="w-full py-3.5 px-6 bg-[#FFC700] hover:bg-[#E8B400] text-black font-heading text-[13px] font-black tracking-wider uppercase rounded-full border-0 cursor-pointer transition hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(255,199,0,0.4)] mt-2.5 disabled:opacity-50">
+                            @(IsSaving ? "SAVING..." : (EditingReviewId.HasValue ? "• SAVE CHANGES" : "• POST REVIEW"))
                         </button>
+
+                        @if (EditingReviewId.HasValue)
+                        {
+                            <button type="button"
+                                    class="w-full mt-2 py-2 text-xs font-heading font-bold uppercase tracking-wider text-neutral-500 hover:text-[#111111]"
+                                    @onclick="ResetForm">
+                                Cancel Edit
+                            </button>
+                        }
                     </EditForm>
                 }
             </div>
@@ -175,77 +217,158 @@
 
     private ProductReview FormModel { get; set; } = new() { Rating = 5 };
     private string formProductId = "general";
+    private int? EditingReviewId { get; set; }
     private bool IsSubmitted { get; set; }
+    private bool WasEdited { get; set; }
+    private bool IsLoading { get; set; } = true;
+    private bool IsSaving { get; set; }
     private string LastAuthorName { get; set; } = string.Empty;
-
-    private IReadOnlyList<ProductReview> FilteredReviews
-    {
-        get
-        {
-            var query = ReviewList.AsEnumerable();
-
-            if (filterProductId == "general")
-            {
-                query = query.Where(r => !r.ProductId.HasValue);
-            }
-            else if (filterProductId != "all" && int.TryParse(filterProductId, out var pid))
-            {
-                query = query.Where(r => r.ProductId == pid);
-            }
-
-            query = sortBy switch
-            {
-                "highest" => query.OrderByDescending(r => r.Rating).ThenByDescending(r => r.CreatedAt),
-                "lowest" => query.OrderBy(r => r.Rating).ThenByDescending(r => r.CreatedAt),
-                _ => query.OrderByDescending(r => r.CreatedAt),
-            };
-
-            return query.ToList();
-        }
-    }
+    private string? ErrorMessage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Products = await FishRepository.GetAllAsync();
-        ProductNames = Products.ToDictionary(p => p.Id, p => p.Name);
-
-        await RefreshReviewsAsync();
+        try
+        {
+            Products = await FishRepository.GetAllAsync();
+            ProductNames = Products.ToDictionary(p => p.Id, p => p.Name);
+            await RefreshReviewsAsync();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+            IsLoading = false;
+        }
     }
 
     private async Task RefreshReviewsAsync()
     {
-        ReviewList = await ReviewService.GetAllAsync();
-        AverageRating = await ReviewService.GetAverageRatingAsync();
-        ReviewCount = await ReviewService.GetReviewCountAsync();
+        IsLoading = true;
+        ErrorMessage = null;
 
-        ProductSummaries = ReviewList
-            .Where(r => r.ProductId.HasValue)
-            .GroupBy(r => r.ProductId!.Value)
-            .ToDictionary(
-                g => g.Key,
-                g => (
-                    Name: ProductNames.TryGetValue(g.Key, out var name) ? name : "Product",
-                    Average: Math.Round(g.Average(r => r.Rating), 1),
-                    Count: g.Count()
-                ));
+        try
+        {
+            bool generalOnly = filterProductId == "general";
+            int? productId = (!generalOnly && filterProductId != "all" && int.TryParse(filterProductId, out var pid))
+                ? pid
+                : null;
+
+            // Habit 2 & 3: single filtered & sorted request to Supabase
+            ReviewList = await ReviewService.GetAllAsync(productId, generalOnly, sortBy);
+
+            ReviewCount = ReviewList.Count;
+            AverageRating = ReviewCount == 0 ? 0 : Math.Round(ReviewList.Average(r => r.Rating), 1);
+
+            ProductSummaries = ReviewList
+                .Where(r => r.ProductId.HasValue)
+                .GroupBy(r => r.ProductId!.Value)
+                .ToDictionary(
+                    g => g.Key,
+                    g => (
+                        Name: ProductNames.TryGetValue(g.Key, out var name) ? name : "Product",
+                        Average: Math.Round(g.Average(r => r.Rating), 1),
+                        Count: g.Count()
+                    ));
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private void StartEditReview(ProductReview review)
+    {
+        EditingReviewId = review.Id;
+        FormModel = new ProductReview
+        {
+            Id = review.Id,
+            ProductId = review.ProductId,
+            AuthorName = review.AuthorName,
+            Rating = review.Rating,
+            Title = review.Title,
+            Comment = review.Comment,
+            CreatedAt = review.CreatedAt
+        };
+        formProductId = review.ProductId.HasValue ? review.ProductId.Value.ToString() : "general";
+        IsSubmitted = false;
+        ErrorMessage = null;
     }
 
     private async Task HandleSubmit()
     {
-        FormModel.ProductId = formProductId == "general" ? null : int.Parse(formProductId);
+        if (IsSaving) return;
 
-        await ReviewService.AddAsync(FormModel);
-        LastAuthorName = FormModel.AuthorName;
-        IsSubmitted = true;
+        IsSaving = true;
+        ErrorMessage = null;
 
-        await RefreshReviewsAsync();
+        try
+        {
+            FormModel.ProductId = formProductId == "general" ? null : int.Parse(formProductId);
+
+            if (EditingReviewId.HasValue)
+            {
+                FormModel.Id = EditingReviewId.Value;
+                await ReviewService.UpdateAsync(FormModel);
+                WasEdited = true;
+            }
+            else
+            {
+                await ReviewService.AddAsync(FormModel);
+                WasEdited = false;
+            }
+
+            LastAuthorName = FormModel.AuthorName;
+            EditingReviewId = null;
+            IsSubmitted = true;
+
+            await RefreshReviewsAsync();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            IsSaving = false;
+        }
+    }
+
+    private async Task DeleteReviewAsync(int reviewId)
+    {
+        if (IsSaving) return;
+
+        IsSaving = true;
+        ErrorMessage = null;
+
+        try
+        {
+            await ReviewService.DeleteAsync(reviewId);
+            if (EditingReviewId == reviewId)
+            {
+                ResetForm();
+            }
+            await RefreshReviewsAsync();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            IsSaving = false;
+        }
     }
 
     private void ResetForm()
     {
         FormModel = new ProductReview { Rating = 5 };
         formProductId = "general";
+        EditingReviewId = null;
         IsSubmitted = false;
+        WasEdited = false;
     }
 
     private string GetProductLabel(int? productId)

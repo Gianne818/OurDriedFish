@@ -9,4 +9,7 @@ public interface IDriedFishRepository
     Task<IReadOnlyList<DriedFishItem>> GetSeasonalAsync();
     Task<IReadOnlyList<DriedFishItem>> SearchAsync(string? query, string? category = null);
     Task<IReadOnlyList<string>> GetCategoriesAsync();
+    Task<DriedFishItem> AddAsync(DriedFishItem item);
+    Task UpdateAsync(DriedFishItem item);
+    Task SoftDeleteAsync(int id);
 }

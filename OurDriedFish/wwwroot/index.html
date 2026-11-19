@@ -9,14 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/site.css?v=@DateTime.UtcNow.Ticks" />
+    <link rel="stylesheet" href="css/site.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
 <body>
-    <Routes @rendermode="InteractiveServer" />
-    <script src="_framework/blazor.web.js"></script>
+    <div id="app">
+        <div class="min-h-screen flex flex-col items-center justify-center bg-white text-[#111111] px-6 text-center">
+            <span class="font-heading text-2xl font-black tracking-tight mb-3">Our Dried Fish®</span>
+            <p class="text-xs font-bold uppercase tracking-widest text-neutral-500">Loading store...</p>
+        </div>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
 </html>

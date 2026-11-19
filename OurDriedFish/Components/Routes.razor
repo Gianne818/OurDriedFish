@@ -1,6 +1,16 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
+<Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
+    <NotFound>
+        <PageTitle>Not found | Our Dried Fish®</PageTitle>
+        <LayoutView Layout="typeof(Layout.MainLayout)">
+            <div class="py-20 text-center site-container">
+                <h1 class="page-title">PAGE NOT FOUND</h1>
+                <p class="text-neutral-600 mb-6">Sorry, there is nothing at this address.</p>
+                <a href="/" class="btn-pill">BACK TO HOME</a>
+            </div>
+        </LayoutView>
+    </NotFound>
 </Router>

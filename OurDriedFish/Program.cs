@@ -1,31 +1,27 @@
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using OurDriedFish.Components;
 using OurDriedFish.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<Routes>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+});
+
+var url = builder.Configuration["Supabase:Url"]!;
+var key = builder.Configuration["Supabase:Key"]!;
+var supabase = new Supabase.Client(url, key,
+    new Supabase.SupabaseOptions { AutoConnectRealtime = false });
+await supabase.InitializeAsync();
+builder.Services.AddSingleton(supabase);
 
 // Register application domain services
 builder.Services.AddSingleton<IDriedFishRepository, DriedFishRepository>();
 builder.Services.AddSingleton<IReviewService, ReviewService>();
 builder.Services.AddScoped<CartService>();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseAntiforgery();
-
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
-
-app.Run();
+await builder.Build().RunAsync();

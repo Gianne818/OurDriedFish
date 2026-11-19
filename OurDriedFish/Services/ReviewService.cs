@@ -1,73 +1,75 @@
 using OurDriedFish.Models;
+using Supabase.Postgrest.Interfaces;
+using static Supabase.Postgrest.Constants;
 
 namespace OurDriedFish.Services;
 
 public class ReviewService : IReviewService
 {
-    private readonly List<ProductReview> _reviews;
-    private int _nextId;
-    private readonly object _lock = new();
+    private readonly Supabase.Client _db;
 
-    public ReviewService()
+    public ReviewService(Supabase.Client db)
     {
-        _reviews = new List<ProductReview>
+        _db = db;
+    }
+
+    public async Task<IReadOnlyList<ProductReview>> GetAllAsync(int? productId = null, bool generalOnly = false, string sortBy = "newest")
+    {
+        IPostgrestTable<ProductReview> table = _db.From<ProductReview>();
+
+        if (generalOnly)
         {
-            new() { Id = 1, ProductId = 1, AuthorName = "Maria Santos", Rating = 5, Title = "Best danggit outside Bantayan", Comment = "Crispy fins, clean salt, and arrived vacuum-sealed fresh. Flash-fried for a minute and served with sukang maanghang.", CreatedAt = DateTime.UtcNow.AddDays(-2) },
-            new() { Id = 2, ProductId = 1, AuthorName = "Jose Ramirez", Rating = 4, Title = "Great, a touch salty", Comment = "Excellent texture and crunch. I rinse it briefly before frying to tame the saltiness. Will order again.", CreatedAt = DateTime.UtcNow.AddDays(-9) },
-            new() { Id = 3, ProductId = 2, AuthorName = "Aileen Cruz", Rating = 5, Title = "Sweet and chewy pusit", Comment = "Tastes like Bogo market sun-dried squid. Pan-fried 30 seconds per side and it stayed tender, not rubbery.", CreatedAt = DateTime.UtcNow.AddDays(-5) },
-            new() { Id = 4, ProductId = 4, AuthorName = "Mark Villanueva", Rating = 5, Title = "Crispy dilis for breakfast", Comment = "Whole intact dilis, perfect for sweet-spicy glaze with peanuts. Kids finished the whole batch.", CreatedAt = DateTime.UtcNow.AddDays(-12) },
-            new() { Id = 5, ProductId = 9, AuthorName = "Lola Nena", Rating = 4, Title = "Tuyo like home", Comment = "Authentic robust tuyo flavor. Fry with the lid on as advised. Perfect with champorado.", CreatedAt = DateTime.UtcNow.AddDays(-20) },
-            new() { Id = 6, ProductId = 6, AuthorName = "Kevin Tan", Rating = 5, Title = "Flounder chips", Comment = "Turned glass-crisp in coconut oil. Light salinity, great with tomato and shallot salad.", CreatedAt = DateTime.UtcNow.AddDays(-7) },
-            new() { Id = 7, ProductId = null, AuthorName = "Teresa Beth", Rating = 5, Title = "Fast shipping to Miami", Comment = "Ordered mixed 3kg for our restaurant. FDA-compliant packs, well-labeled, arrived in 4 days. Excellent support.", CreatedAt = DateTime.UtcNow.AddDays(-3) },
-            new() { Id = 8, ProductId = null, AuthorName = "Dan Meyer", Rating = 4, Title = "Great quality, wish for more", Comment = "Overall quality is top-notch and packaging is excellent. Would love larger bulk discounts for wholesale.", CreatedAt = DateTime.UtcNow.AddDays(-15) },
+            table = table.Where(r => r.ProductId == null);
+        }
+        else if (productId.HasValue)
+        {
+            var pid = productId.Value;
+            table = table.Where(r => r.ProductId == pid);
+        }
+
+        table = sortBy switch
+        {
+            "highest" => table.Order(r => r.Rating, Ordering.Descending).Order(r => r.CreatedAt, Ordering.Descending),
+            "lowest" => table.Order(r => r.Rating, Ordering.Ascending).Order(r => r.CreatedAt, Ordering.Descending),
+            _ => table.Order(r => r.CreatedAt, Ordering.Descending)
         };
-        _nextId = _reviews.Max(r => r.Id) + 1;
+
+        var res = await table.Range(0, 49).Get();
+        return res.Models;
     }
 
-    public Task<IReadOnlyList<ProductReview>> GetAllAsync()
+    public async Task<ProductReview> AddAsync(ProductReview review)
     {
-        IReadOnlyList<ProductReview> snapshot;
-        lock (_lock)
+        var toInsert = new ProductReview
         {
-            snapshot = _reviews.OrderByDescending(r => r.CreatedAt).ToList();
-        }
-        return Task.FromResult(snapshot);
+            ProductId = review.ProductId,
+            AuthorName = review.AuthorName.Trim(),
+            Rating = review.Rating,
+            Title = review.Title.Trim(),
+            Comment = review.Comment.Trim(),
+            CreatedAt = DateTime.UtcNow
+        };
+
+        var res = await _db.From<ProductReview>().Insert(toInsert);
+        return res.Model ?? toInsert;
     }
 
-    public Task<double> GetAverageRatingAsync(int? productId = null)
+    public async Task UpdateAsync(ProductReview review)
     {
-        lock (_lock)
-        {
-            var query = _reviews.AsEnumerable();
-            if (productId.HasValue)
-            {
-                query = query.Where(r => r.ProductId == productId.Value);
-            }
-            var list = query.ToList();
-            var avg = list.Count == 0 ? 0 : list.Average(r => r.Rating);
-            return Task.FromResult(Math.Round(avg, 1));
-        }
+        await _db.From<ProductReview>()
+            .Where(r => r.Id == review.Id)
+            .Set(r => r.ProductId!, review.ProductId)
+            .Set(r => r.AuthorName, review.AuthorName.Trim())
+            .Set(r => r.Rating, review.Rating)
+            .Set(r => r.Title, review.Title.Trim())
+            .Set(r => r.Comment, review.Comment.Trim())
+            .Update();
     }
 
-    public Task<int> GetReviewCountAsync(int? productId = null)
+    public async Task DeleteAsync(int id)
     {
-        lock (_lock)
-        {
-            var count = productId.HasValue
-                ? _reviews.Count(r => r.ProductId == productId.Value)
-                : _reviews.Count;
-            return Task.FromResult(count);
-        }
-    }
-
-    public Task<ProductReview> AddAsync(ProductReview review)
-    {
-        lock (_lock)
-        {
-            review.Id = _nextId++;
-            review.CreatedAt = DateTime.UtcNow;
-            _reviews.Add(review);
-            return Task.FromResult(review);
-        }
+        await _db.From<ProductReview>()
+            .Where(r => r.Id == id)
+            .Delete();
     }
 }
